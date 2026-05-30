@@ -32,7 +32,7 @@ export default function App() {
       <section className="min-h-[75vh] flex items-center justify-center text-center px-6 py-16">
         <div className="max-w-5xl">
           <p className="uppercase tracking-[6px] text-pink-300 text-sm mb-4">
-            Event Website Portfolio
+            Make Your Presence Online
           </p>
 
           <h1 className="text-4xl md:text-7xl font-serif mb-6 leading-tight">
@@ -45,6 +45,16 @@ export default function App() {
             Weddings • Birthdays • Baptisms • Holy Communion • Anniversaries
           </p>
         </div>
+      </section>
+
+      {/* LAUNCH OFFER MARQUEE */}
+      <section className="bg-yellow-500 py-3">
+        <marquee scrollamount="3" className="text-black font-bold">
+          !! 🎉 LAUNCH OFFER — GET 10% OFF ON ALL EVENT WEBSITE CATEGORIES •
+          WEDDINGS • ENGAGEMENTS • BIRTHDAYS • BAPTISMS • HOLY COMMUNIONS •
+          ANNIVERSARIES • BOOK NOW & SAVE • LIMITED TIME OFFER • GRAB IT NOW •
+          !!
+        </marquee>
       </section>
 
       {/* COLLECTIONS */}
@@ -127,6 +137,30 @@ export default function App() {
             WhatsApp Enquiry
           </button>
         </a>
+      </section>
+
+      {/* REFER & EARN */}
+      <section className="py-16 px-6 bg-[#111111]">
+        <div className="max-w-5xl mx-auto text-center bg-[#171717] border border-white/10 rounded-3xl p-8 md:p-12">
+          <h2 className="text-4xl md:text-5xl font-serif mb-4">Refer & Earn</h2>
+
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            Know someone planning a wedding, birthday, baptism, holy communion,
+            anniversary, or any special event? Refer them to us and earn a
+            commission when their website project is successfully completed.
+          </p>
+
+          <div className="mt-8">
+            <span className="inline-block bg-gradient-to-r from-pink-200 to-pink-400 text-black px-8 py-4 rounded-full text-xl font-bold">
+              Earn 10% Referral Commission
+            </span>
+          </div>
+
+          <p className="text-gray-400 mt-6 text-sm">
+            Referral rewards are provided after successful project confirmation
+            and payment completion.
+          </p>
+        </div>
       </section>
     </div>
   );

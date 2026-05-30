@@ -23,7 +23,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link to="/" className="text-pink-300 text-xl font-serif">
-          Event Websites
+          EventWebsite
         </Link>
 
         <div className="relative" ref={menuRef}>

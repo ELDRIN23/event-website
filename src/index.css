@@ -1,2 +1,26 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.marquee {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 25s linear infinite;
+}
+
+.marquee span {
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  padding-right: 80px;
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
