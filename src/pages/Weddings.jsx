@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Weddings() {
   return (
@@ -65,15 +66,11 @@ export default function Weddings() {
               <p>✓ 30 days Hosting</p>
             </div>
 
-            <a
-              href="YOUR_PREMIUM_DEMO_LINK"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <Link to="/wedding-demo">
               <button className="mt-8 w-full bg-gradient-to-r from-pink-200 to-pink-400 text-black py-4 rounded-full font-semibold hover:scale-105 transition">
                 View Premium Demo
               </button>
-            </a>
+            </Link>
 
           </div>
 

@@ -26,6 +26,31 @@ export default function App() {
     },
   ];
 
+  const plans = [
+    {
+      title: "Starter",
+      price: "₹1499",
+      description: "A beautiful event website for smaller celebrations.",
+      button: "Contact Now",
+      route: "/contact",
+    },
+    {
+      title: "Premium",
+      price: "₹2999",
+      description: "Includes the premium wedding demo preview for luxury celebrations.",
+      button: "Preview Demo",
+      route: "/wedding-demo",
+      highlight: true,
+    },
+    {
+      title: "Luxury",
+      price: "₹4499",
+      description: "A high-end website experience with custom styling and support.",
+      button: "Contact Now",
+      route: "/contact",
+    },
+  ];
+
   return (
     <div className="bg-[#0b0b0b] text-white min-h-screen">
       {/* HERO */}
@@ -98,27 +123,22 @@ export default function App() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {[
-            {
-              title: "Starter",
-              price: "₹1499",
-            },
-            {
-              title: "Premium",
-              price: "₹2999",
-            },
-            {
-              title: "Luxury",
-              price: "₹4499",
-            },
-          ].map((plan, index) => (
+          {plans.map((plan, index) => (
             <div
               key={index}
-              className="bg-[#1a1a1a] rounded-3xl p-6 border border-white/10"
+              className={`rounded-3xl p-6 border ${plan.highlight ? "border-pink-300/40 bg-[#1c0e1e]" : "border-white/10 bg-[#1a1a1a]"}`}
             >
               <h3 className="text-2xl font-serif mb-3">{plan.title}</h3>
 
-              <p className="text-4xl font-bold text-pink-300">{plan.price}</p>
+              <p className="text-4xl font-bold text-pink-300 mb-4">{plan.price}</p>
+
+              <p className="text-gray-400 mb-6">{plan.description}</p>
+
+              <Link to={plan.route}>
+                <button className="w-full bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
+                  {plan.button}
+                </button>
+              </Link>
             </div>
           ))}
         </div>
