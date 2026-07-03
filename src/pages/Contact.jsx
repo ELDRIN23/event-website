@@ -33,7 +33,7 @@ export default function Contact() {
           </p>
 
           <a
-            href="https://wa.me/919061014915"
+            href="https://wa.me/9061014915"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -44,7 +44,7 @@ export default function Contact() {
 
           <div className="flex justify-center gap-6 mt-8 text-2xl">
             <a
-              href="https://wa.me/919061014915"
+              href="https://wa.me/9061014915"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-green-400 transition"
