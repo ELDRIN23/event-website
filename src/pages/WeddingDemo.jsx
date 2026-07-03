@@ -12,7 +12,7 @@ export default function WeddingDemo() {
             Explore the Premium Wedding Website
           </h1>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
-            This preview shows the live wedding demo built into the premium plan. Use the embedded site to experience the design, sections, and animations before you book.
+            This preview is loaded from the generated wedding demo bundle so it stays consistent with the site build.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 items-center justify-center sm:flex-row">
@@ -37,22 +37,22 @@ export default function WeddingDemo() {
               Live Demo
             </p>
             <p className="text-gray-400 text-sm mt-1">
-              If the preview does not appear, open the demo in a new tab.
+              The preview is now loaded from the generated demo assets in the public folder.
             </p>
           </div>
 
-          <div className="h-[calc(100vh-220px)] sm:h-[80vh]">
+          <div className="min-h-[420px] h-[70vh] sm:h-[80vh] md:min-h-[620px]">
             <iframe
               src="/demo/index.html"
               title="Wedding Demo"
-              className="w-full h-full border-0"
+              className="w-full h-full min-h-[420px] border-0"
               sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
             />
           </div>
 
           <div className="px-6 py-6 text-gray-300 bg-[#111111]">
             <p className="text-sm">
-              This embedded preview is served directly from the demo build included with the event website. It loads the premium wedding demo experience in a standalone preview frame.
+              This page uses the built wedding demo bundle rather than importing the nested app into the main site, which avoids the React hook conflict and keeps the preview stable.
             </p>
             <a
               href="/demo/index.html"
