@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import Weddings from "./pages/Weddings";
 import FamilyEvents from "./pages/FamilyEvents";
 import LoveCelebrations from "./pages/LoveCelebrations";
+import WeddingDemo from "./pages/WeddingDemo";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/love-celebrations" element={<LoveCelebrations />} />
 
           <Route path="/weddings" element={<Weddings />} />
+          <Route path="/wedding-demo" element={<WeddingDemo />} />
         </Route>
       </Routes>
     </BrowserRouter>
