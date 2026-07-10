@@ -27,6 +27,10 @@ export default function WeddingDemo() {
               </button>
             </Link>
           </div>
+
+          <p className="text-gray-500 text-sm mt-6">
+            💡 The menu collapses to a small icon so you can browse the demo without distraction.
+          </p>
         </div>
       </section>
 
