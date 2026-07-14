@@ -934,6 +934,25 @@ select:focus {
   font-weight: 600;
 }
 
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+  border-color: #1ebe5d;
+}
+
+.btn-whatsapp:hover,
+.btn-whatsapp:focus-visible {
+  background: #1ebe5d;
+  border-color: #17a852;
+}
+
+.rsvp-hint {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+
 .schedule-grid,
 .venue-grid,
 .info-grid,

@@ -12,7 +12,7 @@ const defaultSettings = {
   accentColor: '#d4a5ff',
   secondaryColor: '#ffe3c0',
   heroBackground: 'https://picsum.photos/id/1015/1600/900',
-  whatsappNumber: '',
+  whatsappNumber: '919876543210', // demo number — replace in Customization panel
   emailAddress: '',
   musicUrl: '',
   gallery: [
@@ -740,7 +740,17 @@ export default function App() {
                 <button className="btn btn-primary" type="submit">
                   Save RSVP
                 </button>
-                <a className="btn btn-secondary" href={whatsappUrl} target="_blank" rel="noreferrer">
+                <a
+                  className="btn btn-whatsapp"
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Send RSVP via WhatsApp"
+                >
+                  {/* WhatsApp logo SVG */}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+                    <path d="M16 0C7.163 0 0 7.163 0 16c0 2.827.74 5.484 2.035 7.789L0 32l8.418-2.007A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.77-1.852l-.485-.29-5.002 1.193 1.216-4.868-.317-.5A13.266 13.266 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.26-9.907c-.398-.199-2.357-1.163-2.722-1.296-.365-.133-.631-.199-.897.2-.266.398-1.03 1.296-1.263 1.562-.233.266-.465.3-.863.1-.398-.2-1.681-.619-3.2-1.977-1.183-1.056-1.981-2.36-2.213-2.758-.233-.4-.025-.616.175-.814.18-.179.398-.465.597-.698.2-.233.266-.399.399-.665.133-.266.067-.499-.033-.698-.1-.199-.897-2.162-1.23-2.96-.323-.776-.651-.671-.897-.683l-.765-.013c-.266 0-.698.1-.1065.499-.365.4-1.396 1.363-1.396 3.326s1.43 3.857 1.628 4.123c.2.266 2.814 4.297 6.817 6.025.953.412 1.696.658 2.275.842.956.305 1.826.262 2.514.159.767-.115 2.357-.964 2.69-1.895.333-.932.333-1.73.233-1.896-.1-.165-.366-.265-.764-.465z"/>
+                  </svg>
                   WhatsApp RSVP
                 </a>
                 <a className="btn btn-outline" href={emailUrl}>
@@ -748,6 +758,9 @@ export default function App() {
                 </a>
               </div>
 
+              {!settings.whatsappNumber && (
+                <p className="rsvp-hint">💡 Add your WhatsApp number in the <strong>Customize</strong> panel to enable direct WhatsApp RSVP.</p>
+              )}
               {feedback ? <p className="rsvp-feedback">{feedback}</p> : null}
             </form>
 
