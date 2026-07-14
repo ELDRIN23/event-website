@@ -3,6 +3,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [
-    tailwindcss()
+    tailwindcss(),
   ],
+  server: {
+    host: '0.0.0.0',
+  },
 });
