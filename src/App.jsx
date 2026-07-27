@@ -37,7 +37,8 @@ export default function App() {
     {
       title: "Premium",
       price: "₹2999",
-      description: "Includes the premium wedding demo preview for luxury celebrations.",
+      description:
+        "Includes the premium wedding demo preview for luxury celebrations.",
       button: "Preview Demo",
       route: "/wedding-demo",
       highlight: true,
@@ -45,7 +46,8 @@ export default function App() {
     {
       title: "Luxury",
       price: "₹4499",
-      description: "A high-end website experience with custom styling and support.",
+      description:
+        "A high-end website experience with custom styling and support.",
       button: "Contact Now",
       route: "/contact",
     },
@@ -126,11 +128,13 @@ export default function App() {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`rounded-3xl p-6 border ${plan.highlight ? "border-pink-300/40 bg-[#1c0e1e]" : "border-white/10 bg-[#1a1a1a]"}`}
+              className="rounded-3xl p-6 border border-white/10 bg-[#1a1a1a]"
             >
               <h3 className="text-2xl font-serif mb-3">{plan.title}</h3>
 
-              <p className="text-4xl font-bold text-pink-300 mb-4">{plan.price}</p>
+              <p className="text-4xl font-bold text-pink-300 mb-4">
+                {plan.price}
+              </p>
 
               <p className="text-gray-400 mb-6">{plan.description}</p>
 
