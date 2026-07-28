@@ -53,7 +53,7 @@ export default function Weddings() {
             </h3>
 
             <p className="text-5xl font-bold text-pink-300 mb-8">
-              ₹2999
+              1499
             </p>
 
             <div className="space-y-4 text-gray-300">
@@ -66,11 +66,11 @@ export default function Weddings() {
               <p>✓ 30 days Hosting</p>
             </div>
 
-            <Link to="/wedding-demo">
+            {/* <Link to="/wedding-demo"> */}
               <button className="mt-8 w-full bg-gradient-to-r from-pink-200 to-pink-400 text-black py-4 rounded-full font-semibold hover:scale-105 transition">
                 View Premium Demo
               </button>
-            </Link>
+            {/* </Link> */}
 
           </div>
 
@@ -86,29 +86,25 @@ export default function Weddings() {
             </h3>
 
             <p className="text-5xl font-bold text-pink-300 mb-8">
-              ₹4499
+              ₹2999
             </p>
 
             <div className="space-y-4 text-gray-300">
               <p>✓ Everything In Premium</p>
-              <p>✓ Premium Animations</p>
+              <p>✓ backend support </p>
               <p>✓ Multiple Galleries</p>
               <p>✓ Wedding Timeline</p>
               <p>✓ Guest Wishes Section</p>
               <p>✓ Custom Music</p>
-              <p>✓ Custom Domain Support</p>
+              <p>✓ Custom Domain Support(paid)</p>
               <p>✓ Priority Support</p>
             </div>
 
-            <a
-              href="YOUR_LUXURY_DEMO_LINK"
-              target="_blank"
-              rel="noreferrer"
-            >
+           <Link to="/wedding-demo">
               <button className="mt-8 w-full bg-gradient-to-r from-pink-200 to-pink-400 text-black py-4 rounded-full font-semibold hover:scale-105 transition">
                 View Luxury Demo
               </button>
-            </a>
+            </Link>
 
           </div>
 

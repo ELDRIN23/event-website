@@ -29,27 +29,25 @@ export default function App() {
   const plans = [
     {
       title: "Starter",
-      price: "₹1499",
+      price: "₹999",
       description: "A beautiful event website for smaller celebrations.",
-      button: "Contact Now",
-      route: "/contact",
+      // button: "Contact Now",
+      // route: "/contact",
     },
     {
       title: "Premium",
-      price: "₹2999",
-      description:
-        "Includes the premium wedding demo preview for luxury celebrations.",
-      button: "Preview Demo",
-      route: "/wedding-demo",
+      price: "₹1499",
+      description: "Includes the premium wedding demo preview for luxury celebrations.",
+      // button: "Preview Demo",
+      // route: "/wedding-demo",
       highlight: true,
     },
     {
       title: "Luxury",
-      price: "₹4499",
-      description:
-        "A high-end website experience with custom styling and support.",
-      button: "Contact Now",
-      route: "/contact",
+      price: "₹1999",
+      description: "A high-end website experience with custom styling and support.",
+      // button: "Contact Now",
+      // route: "/contact",
     },
   ];
 
@@ -118,35 +116,35 @@ export default function App() {
         </div>
       </section>
 
-      {/* PRICING */}
-      <section className="py-16 bg-[#111111] px-6">
-        <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-serif">Pricing</h2>
-        </div>
+{/* PRICING */}
+<section className="py-16 bg-[#111111] px-6">
+  <div className="text-center mb-10">
+    <h2 className="text-4xl md:text-5xl font-serif">Pricing</h2>
+  </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {plans.map((plan, index) => (
-            <div
-              key={index}
-              className="rounded-3xl p-6 border border-white/10 bg-[#1a1a1a]"
-            >
-              <h3 className="text-2xl font-serif mb-3">{plan.title}</h3>
+  <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+    {plans.map((plan, index) => (
+      <div
+        key={index}
+        className="rounded-3xl p-6 border border-white/10 bg-[#1a1a1a]"
+      >
+        <h3 className="text-2xl font-serif mb-3">{plan.title}</h3>
 
-              <p className="text-4xl font-bold text-pink-300 mb-4">
-                {plan.price}
-              </p>
+        <p className="text-4xl font-bold text-pink-300 mb-4">
+          {plan.price}
+        </p>
 
-              <p className="text-gray-400 mb-6">{plan.description}</p>
+        <p className="text-gray-400 mb-6">{plan.description}</p>
 
-              <Link to={plan.route}>
-                <button className="w-full bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
-                  {plan.button}
-                </button>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </section>
+        <Link to={plan.route}>
+          {/* <button className="w-full bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
+            {plan.button}
+          </button> */}
+        </Link>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* CONTACT */}
       <section className="py-16 text-center px-6">

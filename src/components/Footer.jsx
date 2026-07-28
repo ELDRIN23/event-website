@@ -28,17 +28,17 @@ export default function Footer() {
           <FaWhatsapp size={20} />
         </a>
 
-        <a
+        {/* <a
           href="https://www.linkedin.com/in/eldrin-johnson"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-blue-400 transition duration-300"
         >
           <FaLinkedin size={20} />
-        </a>
+        </a> */}
 
         <a
-          href="https://www.instagram.com/_e_ldrin/"
+          href=""
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-pink-400 transition duration-300"

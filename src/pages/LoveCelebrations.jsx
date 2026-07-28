@@ -14,13 +14,13 @@ export default function LoveCelebrations() {
       image:
         "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1600&auto=format&fit=crop",
     },
-    {
-      title: "Small Wedding Website",
-      description:
-        "Perfect for intimate weddings with modern design, RSVP and event management features.",
-      image:
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1600&auto=format&fit=crop",
-    },
+    // {
+    //   title: "Small Wedding Website",
+    //   description:
+    //     "Perfect for intimate weddings with modern design, RSVP and event management features.",
+    //   image:
+    //     "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1600&auto=format&fit=crop",
+    // },
   ];
 
   return (
@@ -100,9 +100,9 @@ export default function LoveCelebrations() {
                   {event.description}
                 </p>
 
-                <button className="bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
+                {/* <button className="bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
                   View Demo
-                </button>
+                </button> */}
 
               </div>
 
@@ -181,9 +181,9 @@ export default function LoveCelebrations() {
               special day beautifully.
             </p>
 
-            <button className="bg-gradient-to-r from-pink-200 to-pink-400 text-black px-8 py-4 rounded-full font-semibold">
+            {/* <button className="bg-gradient-to-r from-pink-200 to-pink-400 text-black px-8 py-4 rounded-full font-semibold">
               View Premium Demo
-            </button>
+            </button> */}
 
           </div>
 
