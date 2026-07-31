@@ -1,3 +1,14 @@
+/**
+ * @authors Eldrin Johnson, Merin Joy
+ * @copyright Copyright (c) 2026 Eldrin Johnson and Merin Joy. All Rights Reserved.
+ * 
+ * PROPRIETARY & CONFIDENTIAL
+ * This source code, component logic, and UI design are the exclusive property 
+ * of Eledrin Johnson and Merin Joy. Unauthorized copying, duplication, distribution, or 
+ * modification of this file via any medium is strictly prohibited by law.
+ */
+
+
 import React from "react";
 import { Link } from "react-router-dom";
 
