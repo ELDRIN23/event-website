@@ -3,12 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { Volume2, VolumeX, MapPin, Calendar, Clock, Send, Sparkles, MessageSquare, Heart, Music, PartyPopper } from 'lucide-react';
 
-// Import your uploaded profile picture from your local directory
+// Import your uploaded profile picture
 import profilePic from '../../images/profile.jpg';
+
+// OPTION A: If you have a local MP3 file in your assets folder, uncomment the line below:
+// import bgMusic from '../../assets/music.mp3';
 
 export default function Birthday() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showInvitation, setShowInvitation] = useState(false); // Controls revealing full content
+  const [showInvitation, setShowInvitation] = useState(false);
   const [rsvpOpen, setRsvpOpen] = useState(false);
   const [rsvpData, setRsvpData] = useState({ name: '', guests: '1 Person' });
 
@@ -36,11 +39,13 @@ export default function Birthday() {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
         audioRef.current.volume = 0.5;
-        audioRef.current.play().catch(e => console.log("Audio deferred", e));
+        audioRef.current.play()
+          .then(() => setIsPlaying(true))
+          .catch(e => console.log("Playback failed:", e));
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -54,10 +59,18 @@ export default function Birthday() {
     });
   };
 
-  // Open full invitation content
+  // Open full invitation content & auto-play music
   const handleOpenInvitation = () => {
     setShowInvitation(true);
     triggerConfetti();
+    
+    // Play music automatically when user interacts
+    if (audioRef.current && !isPlaying) {
+        audioRef.current.volume = 0.5;
+        audioRef.current.play()
+            .then(() => setIsPlaying(true))
+            .catch(e => console.log("Auto-play blocked by browser", e));
+    }
 
     // Smooth scroll down to main content after state update
     setTimeout(() => {
@@ -124,12 +137,13 @@ export default function Birthday() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-200 via-pink-100 to-amber-100 font-sans text-slate-800 relative overflow-x-hidden selection:bg-pink-300">
       
-      {/* Audio Player */}
+      {/* Reliable Audio Player (Replaced broken Pixabay URL) */}
       <audio 
         ref={audioRef} 
         loop 
         preload="auto"
-        src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a21d1b.mp3?filename=happy-kids-101160.mp3" 
+        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+        // If using local file import, replace src line above with: src={bgMusic}
       />
 
       {/* Floating Audio Toggle */}
@@ -138,7 +152,7 @@ export default function Birthday() {
           <motion.div 
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-pink-600 shadow-md flex items-center gap-1 hidden sm:flex"
+            className="bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-pink-600 shadow-md hidden sm:flex items-center gap-1"
           >
             <Music className="w-3.5 h-3.5 animate-spin" /> Playing Music
           </motion.div>
@@ -193,7 +207,7 @@ export default function Birthday() {
             </p>
           </div>
 
-          {/* Cartoonic View Invitation Button */}
+          {/* View Invitation Button (Starts Music On Click) */}
           <motion.button
             whileHover={{ scale: 1.05, rotate: 1 }}
             whileTap={{ scale: 0.95 }}
@@ -206,7 +220,7 @@ export default function Birthday() {
         </motion.div>
       </section>
 
-      {/* ALL INVITATION STUFF - REVEALED ON BUTTON CLICK */}
+      {/* INVITATION CONTENT REVEAL */}
       <AnimatePresence>
         {showInvitation && (
           <motion.div
@@ -231,7 +245,7 @@ export default function Birthday() {
                 </h2>
 
                 <p className="text-slate-600 font-medium text-lg">
-                  Join us for a magical day filled with music, laughter, and sweet memories!
+                  Join us for a magical day filled with laughter and sweet memories!
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 text-slate-700">
@@ -372,7 +386,7 @@ export default function Birthday() {
         )}
       </AnimatePresence>
 
-      {/* RSVP Direct to WhatsApp Modal */}
+      {/* RSVP Modal */}
       <AnimatePresence>
         {rsvpOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
