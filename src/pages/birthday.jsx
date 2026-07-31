@@ -1,19 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { Volume2, VolumeX, MapPin, Calendar, Clock, Send, Sparkles, MessageSquare, Heart, Music, PartyPopper } from 'lucide-react';
+import { Volume2, VolumeX, MapPin, Calendar, Clock, Send, Sparkles, MessageSquare, Heart, Music, PartyPopper, Hourglass } from 'lucide-react';
 
 // Import your uploaded profile picture
 import profilePic from '../../images/profile.jpg';
 
-// OPTION A: If you have a local MP3 file in your assets folder, uncomment the line below:
-// import bgMusic from '../../assets/music.mp3';
+// OPTION: Import local soft Malayalam BGM track if available
+// import bgMusic from '../../assets/malayalam_bgm.mp3';
 
 export default function Birthday() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showInvitation, setShowInvitation] = useState(false);
   const [rsvpOpen, setRsvpOpen] = useState(false);
   const [rsvpData, setRsvpData] = useState({ name: '', guests: '1 Person' });
+
+  // Countdown state for January 23, 2027
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   // Load saved wishes from LocalStorage or use defaults
   const [wishes, setWishes] = useState(() => {
@@ -29,7 +32,33 @@ export default function Birthday() {
   const audioRef = useRef(null);
   const inviteRef = useRef(null);
 
-  // Save wishes to localStorage whenever they change
+  // Live Countdown Timer logic targetting Jan 23, 2027
+  useEffect(() => {
+    const targetDate = new Date('2027-01-23T00:00:00');
+
+    const updateCountdown = () => {
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((difference / (1000 * 60)) % 60);
+        const seconds = Math.floor((difference / 1000) % 60);
+
+        setTimeLeft({ days, hours, minutes, seconds });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Save wishes to localStorage
   useEffect(() => {
     localStorage.setItem('christina_birthday_wishes', JSON.stringify(wishes));
   }, [wishes]);
@@ -64,7 +93,6 @@ export default function Birthday() {
     setShowInvitation(true);
     triggerConfetti();
     
-    // Play music automatically when user interacts
     if (audioRef.current && !isPlaying) {
         audioRef.current.volume = 0.5;
         audioRef.current.play()
@@ -72,7 +100,6 @@ export default function Birthday() {
             .catch(e => console.log("Auto-play blocked by browser", e));
     }
 
-    // Smooth scroll down to main content after state update
     setTimeout(() => {
       inviteRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, 150);
@@ -100,50 +127,24 @@ export default function Birthday() {
     setRsvpOpen(false);
   };
 
-  // Childhood & Growing Up Journey Photos
   const childhoodPhotos = [
-    {
-      age: "Baby Steps 🍼",
-      title: "First Birthday Joy",
-      src: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=600"
-    },
-    {
-      age: "Toddler Days 🌸",
-      title: "Little Explorer",
-      src: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=600"
-    },
-    {
-      age: "Early Years 🎨",
-      title: "Giggles & Colors",
-      src: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=600"
-    },
-    {
-      age: "School Days 📚",
-      title: "Sweet Memories",
-      src: "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&q=80&w=600"
-    },
-    {
-      age: "Festive Vibes 🥻",
-      title: "Traditional Elegance",
-      src: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=600"
-    },
-    {
-      age: "Teen Years 🌟",
-      title: "Shining Bright",
-      src: "https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=600"
-    }
+    { age: "Baby Steps 🍼", title: "First Birthday Joy", src: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=600" },
+    { age: "Toddler Days 🌸", title: "Little Explorer", src: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=600" },
+    { age: "Early Years 🎨", title: "Giggles & Colors", src: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=600" },
+    { age: "School Days 📚", title: "Sweet Memories", src: "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&q=80&w=600" },
+    { age: "Festive Vibes 🥻", title: "Traditional Elegance", src: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=600" },
+    { age: "Teen Years 🌟", title: "Shining Bright", src: "https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=600" }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-200 via-pink-100 to-amber-100 font-sans text-slate-800 relative overflow-x-hidden selection:bg-pink-300">
       
-      {/* Reliable Audio Player (Replaced broken Pixabay URL) */}
+      {/* Audio Element (Soft Bamboo Flute Instrumental) */}
       <audio 
         ref={audioRef} 
         loop 
         preload="auto"
-        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
-        // If using local file import, replace src line above with: src={bgMusic}
+        src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=indian-flute-112328.mp3" 
       />
 
       {/* Floating Audio Toggle */}
@@ -169,7 +170,7 @@ export default function Birthday() {
         </motion.button>
       </div>
 
-      {/* FULL-SCREEN CARTOON COVER PAGE SECTION */}
+      {/* COVER PAGE SECTION */}
       <section className="min-h-screen flex flex-col items-center justify-center p-4 text-center z-20 relative">
         <motion.div
           initial={{ scale: 0.8, opacity: 0, y: -20 }}
@@ -177,12 +178,10 @@ export default function Birthday() {
           transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
           className="max-w-md w-full bg-yellow-300 border-4 border-slate-900 rounded-3xl p-6 md:p-8 shadow-[10px_10px_0px_0px_rgba(15,23,42,1)] relative overflow-hidden my-auto"
         >
-          {/* Cartoon Badge */}
           <div className="absolute -top-1 -right-1 bg-pink-500 text-white font-extrabold text-xs px-3 py-1 rounded-bl-xl border-b-4 border-l-4 border-slate-900 tracking-wider">
             SPECIAL INVITATION! 🎈
           </div>
 
-          {/* Cartoon Profile Picture */}
           <div className="relative w-40 h-40 md:w-48 md:h-48 mx-auto mb-6 mt-2">
             <motion.div
               animate={{ rotate: [0, 4, -4, 0], scale: [1, 1.03, 1] }}
@@ -200,14 +199,12 @@ export default function Birthday() {
             </div>
           </div>
 
-          {/* Cartoonic Speech Sentence */}
           <div className="bg-white border-4 border-slate-900 rounded-2xl p-4 mb-6 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] relative">
             <p className="font-extrabold text-slate-900 text-lg md:text-xl leading-snug font-serif">
               "Hey! You're invited to celebrate <span className="text-pink-500 underline decoration-wavy">Christina's</span> big birthday bash!" 🎉
             </p>
           </div>
 
-          {/* View Invitation Button (Starts Music On Click) */}
           <motion.button
             whileHover={{ scale: 1.05, rotate: 1 }}
             whileTap={{ scale: 0.95 }}
@@ -220,7 +217,7 @@ export default function Birthday() {
         </motion.div>
       </section>
 
-      {/* INVITATION CONTENT REVEAL */}
+      {/* INVITATION CONTENT */}
       <AnimatePresence>
         {showInvitation && (
           <motion.div
@@ -228,7 +225,6 @@ export default function Birthday() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* Main Invitation Details Card */}
             <section ref={inviteRef} className="py-16 px-4 max-w-3xl mx-auto z-10 relative">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -248,10 +244,40 @@ export default function Birthday() {
                   Join us for a magical day filled with laughter and sweet memories!
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 text-slate-700">
+                {/* --- COUNTDOWN TIMER SECTION (JANUARY 23, 2027) --- */}
+                <div className="bg-gradient-to-r from-pink-500 to-purple-600 rounded-3xl p-6 text-white border-4 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] my-6">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <Hourglass className="w-5 h-5 animate-spin" />
+                    <span className="font-extrabold uppercase tracking-widest text-xs md:text-sm text-yellow-300">
+                      Counting Down To Jan 23, 2027
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-4 gap-2 md:gap-4 text-center">
+                    <div className="bg-white/20 backdrop-blur-md p-2 md:p-3 rounded-2xl border border-white/30">
+                      <span className="block text-2xl md:text-4xl font-black">{timeLeft.days}</span>
+                      <span className="text-[10px] md:text-xs uppercase font-bold text-pink-100">Days</span>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-md p-2 md:p-3 rounded-2xl border border-white/30">
+                      <span className="block text-2xl md:text-4xl font-black">{timeLeft.hours}</span>
+                      <span className="text-[10px] md:text-xs uppercase font-bold text-pink-100">Hours</span>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-md p-2 md:p-3 rounded-2xl border border-white/30">
+                      <span className="block text-2xl md:text-4xl font-black">{timeLeft.minutes}</span>
+                      <span className="text-[10px] md:text-xs uppercase font-bold text-pink-100">Mins</span>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-md p-2 md:p-3 rounded-2xl border border-white/30">
+                      <span className="block text-2xl md:text-4xl font-black">{timeLeft.seconds}</span>
+                      <span className="text-[10px] md:text-xs uppercase font-bold text-pink-100">Secs</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Event Details */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-2 text-slate-700">
                   <div className="p-4 bg-pink-50 rounded-2xl flex flex-col items-center border border-pink-100">
                     <Calendar className="w-8 h-8 text-pink-500 mb-2" />
-                    <span className="font-bold">20 September 2026</span>
+                    <span className="font-bold">23 January 2027</span>
                     <span className="text-xs text-slate-500">Save the Date!</span>
                   </div>
                   <div className="p-4 bg-yellow-50 rounded-2xl flex flex-col items-center border border-yellow-100">
@@ -280,7 +306,7 @@ export default function Birthday() {
                   </motion.button>
                 </div>
 
-                {/* Embedded Google Map */}
+                {/* Map */}
                 <div className="rounded-2xl overflow-hidden border-2 border-slate-200 shadow-inner h-64 w-full mt-6">
                   <iframe
                     title="Party Location Map"
@@ -295,7 +321,7 @@ export default function Birthday() {
               </motion.div>
             </section>
 
-            {/* Childhood Journey Photo Gallery */}
+            {/* Childhood Gallery */}
             <section className="py-16 px-4 max-w-5xl mx-auto z-10 relative">
               <div className="text-center mb-10">
                 <span className="text-sm font-bold text-pink-600 uppercase tracking-widest bg-pink-200 px-3 py-1 rounded-full">
@@ -327,7 +353,7 @@ export default function Birthday() {
               </div>
             </section>
 
-            {/* Best Wishes Wall Section (LocalStorage Enabled) */}
+            {/* Best Wishes Wall */}
             <section className="py-16 px-4 max-w-3xl mx-auto z-10 relative">
               <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-xl border border-yellow-200">
                 <div className="text-center mb-6">
@@ -371,7 +397,7 @@ export default function Birthday() {
               </div>
             </section>
 
-            {/* Footer Contact */}
+            {/* Footer */}
             <footer className="text-center py-8 z-10 relative border-t border-pink-200 bg-white/50 backdrop-blur-sm">
               <a
                 href="https://wa.me/919061014915"
