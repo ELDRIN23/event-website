@@ -2,9 +2,9 @@
 
 ## 🔒 Copyright & Intellectual Property Notice
 
-**Copyright © 2026 Eledrin Johnson. All Rights Reserved.**
+"**Copyright © 2026 Eldrin Johnson. All Rights Reserved.**"
 
-This repository, including all source code, software architecture, custom UI component designs, brand assets, and media files, is the exclusive intellectual property of **Eledrin Johnson**.
+This repository, including all source code, software architecture, custom UI component designs, brand assets, and media files, is the exclusive intellectual property of **Eldrin Johnson**.
 
 ---
 
@@ -21,7 +21,7 @@ By accessing or viewing this repository, you agree to adhere to the following re
 
 ### ⚖️ Legal Disclaimer & Enforcement Policy
 
-* **Automatic Legal Protection:** In accordance with national and international copyright legislation (including the Berne Convention and digital intellectual property regulations), ownership of this work is strictly held by Eledrin Johnson upon creation.
+* **Automatic Legal Protection:** In accordance with national and international copyright legislation (including the Berne Convention and digital intellectual property regulations), ownership of this work is strictly held by Eldrin Johnson upon creation.
 * **DMCA & Takedown Protocol:** Any unauthorized forks, clones, re-uploads, or deployments found hosted on GitHub, Netlify, Vercel, or any other hosting provider will be immediately reported via official copyright infringement notices (DMCA Takedown Requests).
 * **Legal Action:** Any severe misuse, theft, or unauthorized commercial exploitation will be subject to legal prosecution under applicable civil and criminal copyright laws.
 
@@ -29,6 +29,5 @@ By accessing or viewing this repository, you agree to adhere to the following re
 
 ### 📩 Inquiries & Contact
 
-For permissions, custom licensing requests, or official inquiries regarding this project, please contact:
-* **Project Owner:** Eledrin Johnson
-* **Repository:** [Event Website Application]
+For permissions, custom licensing requests, or official inquiries regarding this project, please contact the developer.
+
