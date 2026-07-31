@@ -76,8 +76,15 @@ export default function FamilyEvents() {
           {events.map((event, index) => (
             <div
               key={index}
-              className="bg-[#171717] rounded-3xl overflow-hidden border border-white/10 hover:border-pink-300/30 transition duration-500 hover:-translate-y-2"
+              className="relative bg-[#171717] rounded-3xl overflow-hidden border border-white/10 hover:border-pink-300/30 transition duration-500 hover:-translate-y-2 group"
             >
+              {/* TRIANGLE / CORNER RIBBON TAG */}
+              <div className="absolute top-0 left-0 w-32 h-32 overflow-hidden z-20 pointer-events-none">
+                <div className="absolute top-5 -left-10 w-40 bg-gradient-to-r from-red-700 via-red-600 to-red-500 text-white font-black text-xs tracking-widest uppercase text-center py-1.5 -rotate-45 shadow-xl shadow-red-950/60 border-y border-red-300/40 animate-pulse">
+                  JUST ₹999
+                </div>
+              </div>
+
               <img
                 src={event.image}
                 alt={event.title}
