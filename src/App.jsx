@@ -190,7 +190,7 @@ export default function App() {
           </h1>
 
           <p className="text-gray-400 text-base md:text-xl font-light tracking-wide max-w-2xl mx-auto">
-            Weddings • Birthdays • Baptisms • Holy Communion • Anniversaries
+            Weddings • Birthdays • Baptisms • Holy Communion • Anniversaries • All religious festivels & functions
           </p>
         </div>
       </section>
