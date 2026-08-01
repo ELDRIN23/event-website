@@ -10,6 +10,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { BackgroundLines } from "./components/ui/background-lines";
 
 // --- CONTINUOUS AMBIENT BACKGROUND PARTICLES COMPONENT ---
 function BackgroundParticlesCanvas() {
@@ -22,7 +23,7 @@ function BackgroundParticlesCanvas() {
     if (!ctx) return;
 
     let animationFrameId;
-    const particleCount = 55;
+    const particleCount = 60;
     let particles = [];
 
     const colors = ["#f472b6", "#fbbf24", "#fef08a", "#ffffff", "#ec4899"];
@@ -171,35 +172,40 @@ export default function App() {
 
   return (
     <div className="bg-[#000000] text-white min-h-screen relative selection:bg-pink-500 selection:text-black overflow-x-hidden">
-      {/* CONTINUOUS SMOOTH MOVING BACKGROUND PARTICLES */}
+      {/* GLOBAL BACKGROUND PARTICLES (Fixed in background, hidden under Hero due to solid bg) */}
       <BackgroundParticlesCanvas />
 
-      {/* HERO SECTION */}
-      <section className="min-h-[80vh] flex items-center justify-center text-center px-6 py-20 relative z-10 bg-[#000000]">
-        <div className="max-w-5xl group [perspective:1000px]">
-          <p className="uppercase tracking-[8px] text-pink-300 text-xs md:text-sm mb-4 font-semibold animate-pulse">
-            Make Your Presence Online
-          </p>
+      {/* HERO SECTION ONLY WITH BACKGROUND LINES & SOLID BG (NO PARTICLES HERE) */}
+      <div className="relative z-10 bg-[#000000] w-full">
+        <BackgroundLines className="min-h-[80vh] md:min-h-[85vh] bg-[#000000] w-full flex items-center justify-center">
+          <section className="min-h-[80vh] md:min-h-[85vh] flex items-center justify-center text-center px-4 sm:px-6 py-12 md:py-20 relative z-10 w-full">
+            <div className="max-w-5xl group [perspective:1000px]">
+              <p className="uppercase tracking-[5px] sm:tracking-[8px] text-pink-300 text-xs md:text-sm mb-4 font-semibold animate-pulse">
+                Make Your Presence Online
+              </p>
 
-          <h1 className="text-4xl md:text-7xl font-serif mb-6 leading-tight tracking-tight drop-shadow-[0_10px_20px_rgba(244,114,182,0.15)] transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateX(4deg)_translateZ(10px)]">
-            Beautiful Websites
-            <br />
-            <span className="bg-gradient-to-r from-white via-pink-200 to-pink-400 bg-clip-text text-transparent">
-              For Every Celebration
-            </span>
-          </h1>
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif mb-6 leading-tight tracking-tight drop-shadow-[0_10px_20px_rgba(244,114,182,0.15)] transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateX(4deg)_translateZ(10px)]">
+                Beautiful Websites
+                <br />
+                <span className="bg-gradient-to-r from-white via-pink-200 to-pink-400 bg-clip-text text-transparent">
+                  For Every Celebration
+                </span>
+              </h1>
 
-          <p className="text-gray-400 text-base md:text-xl font-light tracking-wide max-w-2xl mx-auto">
-            Weddings • Birthdays • Baptisms • Holy Communion • Anniversaries • All religious festivels & functions
-          </p>
-        </div>
-      </section>
+              <p className="text-gray-400 text-sm sm:text-base md:text-xl font-light tracking-wide max-w-2xl mx-auto px-2">
+                Weddings • Birthdays • Baptisms • Holy Communion • Anniversaries •
+                All religious festivals & functions
+              </p>
+            </div>
+          </section>
+        </BackgroundLines>
+      </div>
 
       {/* LAUNCH OFFER MARQUEE */}
       <section className="bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 py-3 relative z-10 shadow-[0_0_25px_rgba(245,158,11,0.3)]">
         <marquee
           scrollamount="4"
-          className="text-black font-black uppercase text-sm tracking-wider"
+          className="text-black font-black uppercase text-xs md:text-sm tracking-wider"
         >
           !! 🎉 LAUNCH OFFER — GET 10% OFF ON ALL EVENT WEBSITE CATEGORIES •
           WEDDINGS • ENGAGEMENTS • BIRTHDAYS • BAPTISMS • HOLY COMMUNIONS •
@@ -208,13 +214,13 @@ export default function App() {
         </marquee>
       </section>
 
-      {/* DEMO COLLECTIONS (WITH 3D CARDS) */}
-      <section className="py-24 px-6 md:px-16 bg-[#000000] relative z-10">
-        <div className="text-center mb-16">
+      {/* DEMO COLLECTIONS (TRANSPARENT BG - SHOWS PARTICLES) */}
+      <section className="py-16 md:py-24 px-4 sm:px-6 md:px-16 relative z-10">
+        <div className="text-center mb-12 md:mb-16">
           <p className="uppercase tracking-[4px] text-pink-300 text-xs font-semibold mb-2">
             Curated Themes
           </p>
-          <h2 className="text-4xl md:text-5xl font-serif">Demo Collections</h2>
+          <h2 className="text-3xl md:text-5xl font-serif">Demo Collections</h2>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -223,8 +229,8 @@ export default function App() {
               key={index}
               className="group [perspective:1000px] cursor-pointer"
             >
-              <div className="bg-[#050505] rounded-3xl overflow-hidden border border-white/10 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(8deg)_rotateY(-4deg)_translateZ(20px)] group-hover:border-pink-300/50 group-hover:shadow-[0_20px_50px_rgba(244,114,182,0.2)]">
-                <div className="overflow-hidden relative h-64">
+              <div className="bg-[#050505]/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(8deg)_rotateY(-4deg)_translateZ(20px)] group-hover:border-pink-300/50 group-hover:shadow-[0_20px_50px_rgba(244,114,182,0.2)]">
+                <div className="overflow-hidden relative h-56 sm:h-64">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -233,15 +239,15 @@ export default function App() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
                 </div>
 
-                <div className="p-8 relative">
-                  <h3 className="text-2xl font-serif mb-3 text-white group-hover:text-pink-300 transition-colors">
+                <div className="p-6 sm:p-8 relative">
+                  <h3 className="text-xl sm:text-2xl font-serif mb-3 text-white group-hover:text-pink-300 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">
+                  <p className="text-gray-400 mb-6 text-xs sm:text-sm leading-relaxed">
                     {item.description}
                   </p>
                   <Link to={item.route}>
-                    <button className="bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition-all shadow-lg hover:shadow-pink-500/25">
+                    <button className="bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-3 rounded-full font-semibold text-xs sm:text-sm hover:scale-105 transition-all shadow-lg hover:shadow-pink-500/25">
                       View Collection
                     </button>
                   </Link>
@@ -252,56 +258,51 @@ export default function App() {
         </div>
       </section>
 
-      {/* PRICING SECTION (WITH UNIFORM 3D CARDS) */}
-     {/* PRICING SECTION */}
-<section className="py-24 bg-[#000000] px-6 relative z-10 border-t border-white/5">
-  <div className="text-center mb-16">
-    <p className="uppercase tracking-[4px] text-pink-300 text-xs font-semibold mb-2">
-      Transparent Rates
-    </p>
-
-    <h2 className="text-4xl md:text-5xl font-serif">
-      Pricing Plans
-    </h2>
-  </div>
-
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
-    {plans.map((plan, index) => (
-      <div key={index} className="group [perspective:1000px] h-full">
-        <div className="h-full flex flex-col bg-[#050505] border border-white/10 rounded-3xl p-8 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(6deg)_translateZ(20px)] group-hover:border-pink-300/40 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
-
-          {plan.highlight && (
-            <span className="text-[10px] font-mono tracking-widest uppercase bg-pink-400 text-black px-3 py-1 rounded-full font-bold mb-4 inline-block w-fit">
-              Most Popular
-            </span>
-          )}
-
-          <h3 className="text-2xl font-serif mb-3 text-white">
-            {plan.title}
-          </h3>
-
-          <p className="text-4xl font-bold bg-gradient-to-r from-pink-200 to-pink-400 bg-clip-text text-transparent mb-4">
-            {plan.price}
+      {/* PRICING SECTION (TRANSPARENT BG - SHOWS PARTICLES) */}
+      <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-white/5">
+        <div className="text-center mb-12 md:mb-16">
+          <p className="uppercase tracking-[4px] text-pink-300 text-xs font-semibold mb-2">
+            Transparent Rates
           </p>
 
-          <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-            {plan.description}
-          </p>
-
+          <h2 className="text-3xl md:text-5xl font-serif">Pricing Plans</h2>
         </div>
-      </div>
-    ))}
-  </div>
-</section>
 
-      {/* PROCEDURE & TIMELINE SECTION (WITH 3D NODE GLOW) */}
-      <section className="py-24 px-6 max-w-6xl mx-auto bg-[#000000] relative z-10 border-t border-white/5">
-        <div className="text-center mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
+          {plans.map((plan, index) => (
+            <div key={index} className="group [perspective:1000px] h-full">
+              <div className="h-full flex flex-col bg-[#050505]/90 backdrop-blur-sm border border-white/10 rounded-3xl p-6 sm:p-8 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(6deg)_translateZ(20px)] group-hover:border-pink-300/40 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
+                {plan.highlight && (
+                  <span className="text-[10px] font-mono tracking-widest uppercase bg-pink-400 text-black px-3 py-1 rounded-full font-bold mb-4 inline-block w-fit">
+                    Most Popular
+                  </span>
+                )}
+
+                <h3 className="text-xl sm:text-2xl font-serif mb-3 text-white">
+                  {plan.title}
+                </h3>
+
+                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-200 to-pink-400 bg-clip-text text-transparent mb-4">
+                  {plan.price}
+                </p>
+
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed flex-grow">
+                  {plan.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* PROCEDURE & TIMELINE SECTION (TRANSPARENT BG - SHOWS PARTICLES) */}
+      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto relative z-10 border-t border-white/5">
+        <div className="text-center mb-12 md:mb-16">
           <p className="uppercase tracking-[4px] text-pink-300 text-xs font-semibold mb-2">
             Simple & Seamless Process
           </p>
-          <h2 className="text-4xl md:text-5xl font-serif">How It Works</h2>
-          <p className="text-gray-400 mt-3 max-w-xl mx-auto text-sm md:text-base">
+          <h2 className="text-3xl md:text-5xl font-serif">How It Works</h2>
+          <p className="text-gray-400 mt-3 max-w-xl mx-auto text-xs sm:text-base">
             From initial idea to live website launch in 4 clear, hassle-free
             steps.
           </p>
@@ -316,26 +317,26 @@ export default function App() {
 
                 {/* Timeline Icon Node */}
                 <div className="timeline-middle z-10 my-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-300 to-pink-500 text-black font-black flex items-center justify-center text-sm shadow-[0_0_20px_rgba(244,114,182,0.5)] border-2 border-black group-hover:scale-125 transition-transform duration-300">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-pink-300 to-pink-500 text-black font-black flex items-center justify-center text-xs sm:text-sm shadow-[0_0_20px_rgba(244,114,182,0.5)] border-2 border-black group-hover:scale-125 transition-transform duration-300">
                     {step.step}
                   </div>
                 </div>
 
-                {/* Timeline Card Content with 3D Transform */}
+                {/* Timeline Card Content */}
                 <div
                   className={`${
                     isEven
-                      ? "timeline-start md:text-end mb-12"
-                      : "timeline-end md:mb-12"
-                  } p-8 bg-[#050505] border border-white/10 rounded-3xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(4deg)_rotateY(-2deg)_translateZ(15px)] group-hover:border-pink-300/40 group-hover:shadow-[0_20px_40px_rgba(244,114,182,0.15)] max-w-lg`}
+                      ? "timeline-start md:text-end mb-8 md:mb-12"
+                      : "timeline-end mb-8 md:mb-12"
+                  } p-6 sm:p-8 bg-[#050505]/90 backdrop-blur-sm border border-white/10 rounded-3xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(4deg)_rotateY(-2deg)_translateZ(15px)] group-hover:border-pink-300/40 group-hover:shadow-[0_20px_40px_rgba(244,114,182,0.15)] max-w-lg`}
                 >
-                  <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-pink-300 bg-pink-950/40 border border-pink-500/30 px-3 py-1 rounded-full inline-block mb-3">
+                  <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-pink-300 bg-pink-950/40 border border-pink-500/30 px-3 py-1 rounded-full inline-block mb-3">
                     {step.phase}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-serif font-bold text-white mb-2">
+                  <h3 className="text-lg sm:text-2xl font-serif font-bold text-white mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-gray-400 text-sm md:text-base leading-relaxed font-light">
+                  <p className="text-gray-400 text-xs sm:text-base leading-relaxed font-light">
                     {step.description}
                   </p>
                 </div>
@@ -350,23 +351,23 @@ export default function App() {
       </section>
 
       {/* REFER & EARN SECTION */}
-      <section className="py-24 px-6 bg-[#000000] relative z-10 border-t border-white/5">
-        <div className="max-w-5xl mx-auto text-center bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-14 group [perspective:1000px] hover:border-pink-300/40 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
-          <h2 className="text-4xl md:text-5xl font-serif mb-4">Refer & Earn</h2>
+      <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-white/5">
+        <div className="max-w-5xl mx-auto text-center bg-[#050505]/90 backdrop-blur-sm border border-white/10 rounded-3xl p-6 sm:p-14 group [perspective:1000px] hover:border-pink-300/40 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+          <h2 className="text-3xl md:text-5xl font-serif mb-4">Refer & Earn</h2>
 
-          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-gray-300 text-sm md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
             Know someone planning a wedding, birthday, baptism, holy communion,
             anniversary, or any special event? Refer them to us and earn a
             commission when their website project is successfully completed.
           </p>
 
           <div className="mt-8">
-            <span className="inline-block bg-gradient-to-r from-pink-200 to-pink-400 text-black px-8 py-4 rounded-full text-lg md:text-xl font-bold shadow-[0_10px_25px_rgba(244,114,182,0.3)] hover:scale-105 transition-transform">
+            <span className="inline-block bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-xl font-bold shadow-[0_10px_25px_rgba(244,114,182,0.3)] hover:scale-105 transition-transform">
               Earn 10% Referral Commission
             </span>
           </div>
 
-          <p className="text-gray-500 mt-6 text-xs tracking-wider uppercase">
+          <p className="text-gray-500 mt-6 text-[10px] sm:text-xs tracking-wider uppercase">
             Referral rewards are provided after successful project confirmation
             and payment completion.
           </p>
@@ -374,17 +375,17 @@ export default function App() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section className="py-24 text-center px-6 bg-[#000000] relative z-10 border-t border-white/5">
-        <h2 className="text-4xl md:text-5xl font-serif mb-4">
+      <section className="py-16 md:py-24 text-center px-4 sm:px-6 relative z-10 border-t border-white/5">
+        <h2 className="text-3xl md:text-5xl font-serif mb-4">
           Let's Build Something Beautiful
         </h2>
 
-        <p className="text-gray-400 mb-8 text-sm md:text-base">
+        <p className="text-gray-400 mb-8 text-xs sm:text-base">
           Contact us to start creating your custom event website.
         </p>
 
         <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer">
-          <button className="bg-gradient-to-r from-pink-200 to-pink-400 text-black px-10 py-4 rounded-full font-bold hover:scale-110 transition-transform duration-300 shadow-[0_0_30px_rgba(244,114,182,0.3)]">
+          <button className="bg-gradient-to-r from-pink-200 to-pink-400 text-black px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base hover:scale-110 transition-transform duration-300 shadow-[0_0_30px_rgba(244,114,182,0.3)]">
             WhatsApp Enquiry
           </button>
         </a>
