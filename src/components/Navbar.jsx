@@ -116,7 +116,7 @@ export default function Navbar() {
 
           {/* Menu Dropdown Container */}
           <div className="relative" ref={menuRef}>
-            <button
+            {/* <button
               onClick={toggleMenu}
               className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2.5 rounded-xl transition border border-white/15 text-sm sm:text-base text-white font-medium cursor-pointer"
               aria-expanded={open}
@@ -124,7 +124,7 @@ export default function Navbar() {
             >
               <span>Menu</span>
               <span className="text-base">☰</span>
-            </button>
+            </button> */}
 
             {/* DROPDOWN MENU PANEL (FIXED VIEWPORT POSITIONING) */}
             {open && (
