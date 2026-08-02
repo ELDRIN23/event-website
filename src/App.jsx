@@ -244,7 +244,7 @@ export default function App() {
               {/* GREEN WHATSAPP HERO BUTTON WITH GUARANTEED BLACK TEXT */}
               <div className="flex justify-center">
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/919061014915"
                   target="_blank"
                   rel="noreferrer"
                   style={{ color: "#000000" }}
@@ -465,7 +465,7 @@ export default function App() {
         </p>
 
         <a
-          href="https://wa.me/919876543210"
+          href="https://wa.me/919061014915"
           target="_blank"
           rel="noreferrer"
           className="inline-block"
