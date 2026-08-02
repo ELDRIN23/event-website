@@ -118,22 +118,29 @@ export default function App() {
     },
   ];
 
+  // ALL PLANS SET TO FLAT 20% DISCOUNT WITH EXPLICIT DUMMY & ACTUAL PRICES
   const plans = [
     {
       title: "Starter",
+      originalPrice: "₹1249",
       price: "₹999",
+      discount: "20% OFF",
       description: "A beautiful event website for smaller celebrations.",
     },
     {
       title: "Premium",
+      originalPrice: "₹1899",
       price: "₹1499",
+      discount: "20% OFF",
       description:
         "Includes the premium wedding demo preview for luxury celebrations.",
       highlight: true,
     },
     {
       title: "Luxury",
+      originalPrice: "₹2499",
       price: "₹1999",
+      discount: "20% OFF",
       description:
         "A high-end website experience with custom styling and support.",
     },
@@ -171,11 +178,11 @@ export default function App() {
   ];
 
   const launchOfferText =
-    "!! 🎉 LAUNCH OFFER — GET 10% OFF ON ALL EVENT WEBSITE CATEGORIES • WEDDINGS • ENGAGEMENTS • BIRTHDAYS • BAPTISMS • HOLY COMMUNIONS • ANNIVERSARIES • BOOK NOW & SAVE • LIMITED TIME OFFER • GRAB IT NOW • !!";
+    "!! 🎉 LAUNCH OFFER — GET FLAT 20% OFF ON ALL EVENT WEBSITE CATEGORIES • WEDDINGS • ENGAGEMENTS • BIRTHDAYS • BAPTISMS • HOLY COMMUNIONS • ANNIVERSARIES • BOOK NOW & SAVE • LIMITED TIME OFFER • GRAB IT NOW • !!";
 
   return (
     <div className="bg-[#000000] text-white min-h-screen relative selection:bg-pink-500 selection:text-black overflow-x-hidden">
-      {/* CSS KEYFRAMES FOR HARDWARE-ACCELERATED MOBILE MARQUEE */}
+      {/* CSS KEYFRAMES FOR HARDWARE-ACCELERATED MOBILE MARQUEE & STRIKE-THROUGH ANIMATION */}
       <style>{`
         @keyframes smoothMarquee {
           0% { transform: translate3d(0, 0, 0); }
@@ -186,6 +193,26 @@ export default function App() {
           width: max-content;
           will-change: transform;
           animation: smoothMarquee 22s linear infinite;
+        }
+
+        @keyframes drawStrike {
+          0% { width: 0%; }
+          100% { width: 105%; }
+        }
+        .animated-strike {
+          position: relative;
+          display: inline-block;
+        }
+        .animated-strike::after {
+          content: "";
+          position: absolute;
+          left: -2.5%;
+          top: 50%;
+          height: 2.5px;
+          background: #ef4444; /* Vibrant red strike line */
+          box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+          animation: drawStrike 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+          transform: translateY(-50%) rotate(-3deg);
         }
       `}</style>
 
@@ -239,7 +266,7 @@ export default function App() {
         </BackgroundLines>
       </div>
 
-      {/* LAUNCH OFFER MARQUEE (GPU ACCELERATED, INSTANT START ON MOBILE) */}
+      {/* LAUNCH OFFER MARQUEE */}
       <section className="bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 py-3 relative z-10 shadow-[0_0_25px_rgba(245,158,11,0.3)] overflow-hidden">
         <div className="animate-smooth-marquee">
           <span
@@ -301,7 +328,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* PRICING SECTION */}
+      {/* PRICING SECTION WITH 20% DISCOUNT RIBBON TAGS & STRIKE-THROUGH DUMMY PRICES */}
       <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-white/5">
         <div className="text-center mb-12 md:mb-16">
           <p className="uppercase tracking-[4px] text-pink-300 text-xs font-semibold mb-2">
@@ -314,20 +341,32 @@ export default function App() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
           {plans.map((plan, index) => (
             <div key={index} className="group [perspective:1000px] h-full">
-              <div className="h-full flex flex-col bg-[#050505]/90 backdrop-blur-sm border border-white/10 rounded-3xl p-6 sm:p-8 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(6deg)_translateZ(20px)] group-hover:border-pink-300/40 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
+              <div className="relative h-full flex flex-col bg-[#050505]/90 backdrop-blur-sm border border-white/10 rounded-3xl p-6 sm:p-8 pt-10 sm:pt-12 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(6deg)_translateZ(20px)] group-hover:border-pink-300/40 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.9)] overflow-hidden">
+                
+                {/* LEFT-SIDE 20% DISCOUNT RIBBON TAG */}
+                <div className="absolute top-4 left-0 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black text-[11px] sm:text-xs px-3.5 py-1 rounded-r-full shadow-[0_0_15px_rgba(244,114,182,0.5)] tracking-wider z-20 flex items-center gap-1">
+                  <span>🏷️</span> {plan.discount}
+                </div>
+
                 {plan.highlight && (
-                  <span className="text-[10px] font-mono tracking-widest uppercase bg-pink-400 text-black px-3 py-1 rounded-full font-bold mb-4 inline-block w-fit">
+                  <span className="text-[10px] font-mono tracking-widest uppercase bg-pink-400 text-black px-3 py-1 rounded-full font-bold mb-4 inline-block w-fit self-end">
                     Most Popular
                   </span>
                 )}
 
-                <h3 className="text-xl sm:text-2xl font-serif mb-3 text-white">
+                <h3 className="text-xl sm:text-2xl font-serif mb-3 text-white mt-2">
                   {plan.title}
                 </h3>
 
-                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-200 to-pink-400 bg-clip-text text-transparent mb-4">
-                  {plan.price}
-                </p>
+                {/* PRICE DISPLAY WITH ANIMATED STRIKE-THROUGH DUMMY PRICE */}
+                <div className="flex items-baseline gap-3 mb-4">
+                  <span className="animated-strike text-gray-500 text-lg sm:text-xl font-medium">
+                    {plan.originalPrice}
+                  </span>
+                  <span className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-200 to-pink-400 bg-clip-text text-transparent">
+                    {plan.price}
+                  </span>
+                </div>
 
                 <p className="text-gray-400 text-xs sm:text-sm leading-relaxed flex-grow">
                   {plan.description}
