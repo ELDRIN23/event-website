@@ -214,23 +214,24 @@ export default function App() {
         </marquee>
       </section>
 
-      {/* DEMO COLLECTIONS (TRANSPARENT BG - SHOWS PARTICLES) */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 md:px-16 relative z-10">
-        <div className="text-center mb-12 md:mb-16">
+      {/* DEMO COLLECTIONS (PROPORTIONAL MOBILE RESPONSIVE CARDS) */}
+      <section className="py-12 md:py-24 px-4 sm:px-6 md:px-16 relative z-10">
+        <div className="text-center mb-8 md:mb-16">
           <p className="uppercase tracking-[4px] text-pink-300 text-xs font-semibold mb-2">
             Curated Themes
           </p>
           <h2 className="text-3xl md:text-5xl font-serif">Demo Collections</h2>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md sm:max-w-7xl mx-auto">
           {collections.map((item, index) => (
             <div
               key={index}
               className="group [perspective:1000px] cursor-pointer"
             >
-              <div className="bg-[#050505]/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(8deg)_rotateY(-4deg)_translateZ(20px)] group-hover:border-pink-300/50 group-hover:shadow-[0_20px_50px_rgba(244,114,182,0.2)]">
-                <div className="overflow-hidden relative h-56 sm:h-64">
+              <div className="bg-[#050505]/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(8deg)_rotateY(-4deg)_translateZ(20px)] group-hover:border-pink-300/50 group-hover:shadow-[0_20px_50px_rgba(244,114,182,0.2)]">
+                {/* Responsive Aspect Ratio instead of overly tall fixed heights */}
+                <div className="overflow-hidden relative aspect-[16/10] sm:aspect-auto sm:h-64">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -239,15 +240,15 @@ export default function App() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
                 </div>
 
-                <div className="p-6 sm:p-8 relative">
-                  <h3 className="text-xl sm:text-2xl font-serif mb-3 text-white group-hover:text-pink-300 transition-colors">
+                <div className="p-5 sm:p-8 relative">
+                  <h3 className="text-lg sm:text-2xl font-serif mb-2 sm:mb-3 text-white group-hover:text-pink-300 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-gray-400 mb-6 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-gray-400 mb-5 text-xs sm:text-sm leading-relaxed">
                     {item.description}
                   </p>
-                  <Link to={item.route}>
-                    <button className="bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-3 rounded-full font-semibold text-xs sm:text-sm hover:scale-105 transition-all shadow-lg hover:shadow-pink-500/25">
+                  <Link to={item.route} className="block">
+                    <button className="w-full sm:w-auto bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-2.5 sm:py-3 rounded-full font-semibold text-xs sm:text-sm hover:scale-105 transition-all shadow-lg hover:shadow-pink-500/25">
                       View Collection
                     </button>
                   </Link>
