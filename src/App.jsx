@@ -21,6 +21,11 @@ import {
   Camera,
   PartyPopper,
 } from "lucide-react";
+// Import the BackgroundLines component
+import { BackgroundLines } from "./components/ui/background-lines";
+import { WorldMap } from "./components/ui/world-map";
+
+
 
 export default function App() {
   const collections = [
@@ -145,33 +150,16 @@ export default function App() {
         }
       `}</style>
 
-      {/* --- FLOATING DECORATIVE BACKGROUND ICONS --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-20">
-        <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute top-[8%] left-[5%] text-slate-800">
-          <Heart size={36} />
-        </motion.div>
-        <motion.div animate={{ y: [0, 20, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute top-[18%] right-[8%] text-slate-800">
-          <Sparkles size={40} />
-        </motion.div>
-        <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 4.5, repeat: Infinity }} className="absolute top-[35%] left-[3%] text-slate-800">
-          <Gem size={32} />
-        </motion.div>
-        <motion.div animate={{ y: [0, 15, 0] }} transition={{ duration: 5.5, repeat: Infinity }} className="absolute top-[48%] right-[4%] text-slate-800">
-          <GlassWater size={36} />
-        </motion.div>
-        <motion.div animate={{ y: [0, -18, 0] }} transition={{ duration: 6.5, repeat: Infinity }} className="absolute top-[65%] left-[6%] text-slate-800">
-          <Music size={34} />
-        </motion.div>
-        <motion.div animate={{ y: [0, 14, 0] }} transition={{ duration: 4.8, repeat: Infinity }} className="absolute top-[78%] right-[5%] text-slate-800">
-          <PartyPopper size={38} />
-        </motion.div>
-        <motion.div animate={{ y: [0, -16, 0] }} transition={{ duration: 5.2, repeat: Infinity }} className="absolute top-[90%] left-[8%] text-slate-800">
-          <Gift size={32} />
-        </motion.div>
-      </div>
-
-      {/* HERO SECTION */}
+      {/* HERO SECTION - Now wrapped in BackgroundLines */}
+      {/* We keep the inner white background div, but the animation from BackgroundLines will render */}
+      {/* behind the content because of relative positioning. */}
       <div className="relative z-10 bg-white w-full border-b border-slate-200/60 overflow-hidden">
+        
+        {/* Use the demo animation as a subtle background. Pointer-events are disabled so text is selectable */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
+           <BackgroundLines className="w-full h-full" />
+        </div>
+
         <section className="min-h-[80vh] md:min-h-[85vh] flex items-center justify-between px-6 md:px-16 py-12 md:py-20 max-w-7xl mx-auto relative z-10 w-full">
           <div className="max-w-2xl text-left">
             <p className="uppercase tracking-[4px] sm:tracking-[6px] text-slate-500 text-xs md:text-sm mb-4 font-semibold flex items-center gap-2">
@@ -188,12 +176,12 @@ export default function App() {
               </span>
             </h1>
 
-            <p className="text-slate-600 text-sm sm:text-base md:text-lg font-normal tracking-wide max-w-xl mb-10">
+            <p className="text-slate-600 text-sm sm:text-base md:text-lg font-normal tracking-wide max-w-xl mb-10 relative z-20">
               Weddings • Birthdays • Baptisms • Holy Communion • Anniversaries •
               All religious festivals & functions
             </p>
 
-            <div className="flex justify-start">
+            <div className="flex justify-start relative z-20">
               <a
                 href="https://wa.me/919061014915"
                 target="_blank"
@@ -216,7 +204,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="hidden lg:flex items-center justify-center w-1/2 pl-12 relative"
+            className="hidden lg:flex items-center justify-center w-1/2 pl-12 relative z-10"
           >
             {/* Soft Ambient Radial Glow Behind Image */}
             <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-amber-200/30 via-rose-100/40 to-slate-100/50 blur-3xl rounded-full scale-110 pointer-events-none" />
@@ -226,7 +214,7 @@ export default function App() {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               src={heroIllustrationUrl}
               alt="Bride and Groom Illustration"
-              className="w-full max-w-lg h-auto object-contain mix-blend-multiply opacity-95 [mask-image:radial-gradient(ellipse_at_center,black_75%,transparent_100%)]"
+              className="w-full max-w-lg h-auto object-contain mix-blend-multiply opacity-95 [mask-image:radial-gradient(ellipse_at_center,black_75%,transparent_100%)] relative z-20"
             />
           </motion.div>
         </section>
@@ -292,6 +280,41 @@ export default function App() {
           ))}
         </div>
       </section>
+
+      {/* WORLD MAP SECTION
+      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto relative z-10 border-t border-slate-200/60">
+        <div className="text-center mb-12 md:mb-16">
+          <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2">
+            Global Reach
+          </p>
+          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">
+            Clients Around the World
+          </h2>
+          <p className="text-slate-600 mt-3 max-w-xl mx-auto text-xs sm:text-base">
+            Delivering bespoke event websites across borders and time zones.
+          </p>
+        </div>
+
+        <div className="bg-[#f3f4f6] border border-slate-300/80 rounded-3xl p-4 sm:p-8 shadow-sm">
+          <WorldMap
+            lineColor="#000000"
+            dots={[
+              {
+                start: { lat: 10.5276, lng: 76.2144 }, // Thrissur, Kerala
+                end: { lat: 25.2048, lng: 55.2708 },   // Dubai, UAE
+              },
+              {
+                start: { lat: 10.5276, lng: 76.2144 }, // Thrissur, Kerala
+                end: { lat: 40.7128, lng: -74.0060 },  // New York, USA
+              },
+              {
+                start: { lat: 10.5276, lng: 76.2144 }, // Thrissur, Kerala
+                end: { lat: 51.5074, lng: -0.1278 },   // London, UK
+              },
+            ]}
+          />
+        </div>
+      </section> */}
 
       {/* PRICING SECTION */}
       <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-slate-200/60 bg-white">

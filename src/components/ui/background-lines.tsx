@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "../../lib/utils";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import React from "react";
 
 export const BackgroundLines = ({
@@ -10,9 +10,9 @@ export const BackgroundLines = ({
 }) => {
   return (
     <div
-      className={cn("h-[20rem] md:h-screen w-full bg-white dark:bg-black", className)}>
+      className={cn("h-[20rem] md:h-screen w-full bg-white relative overflow-hidden", className)}>
       <SVG svgOptions={svgOptions} />
-      {children}
+      <div className="relative z-10">{children}</div>
     </div>
   );
 };
@@ -22,7 +22,7 @@ const pathVariants = {
   animate: {
     strokeDashoffset: 0,
     strokeDasharray: "20 800",
-    opacity: [0, 1, 1, 0],
+    opacity: [0, 0.9, 0.9, 0], // Increased max opacity to 0.9 for bolder visibility
   },
 };
 
@@ -53,28 +53,29 @@ const SVG = ({
     "M720 450C720 450 730.571 424.312 761.424 411.44C792.277 398.569 772.385 393.283 804.069 377.232C835.752 361.182 829.975 361.373 848.987 342.782C867.999 324.192 877.583 330.096 890.892 303.897C904.201 277.698 910.277 282.253 937.396 264.293C964.514 246.333 949.357 246.834 978.7 230.438C1008.04 214.042 990.424 217.952 1021.51 193.853C1052.6 169.753 1054.28 184.725 1065.97 158.075C1077.65 131.425 1087.76 139.068 1111.12 120.345C1134.49 101.622 1124.9 104.858 1151.67 86.3162C1178.43 67.7741 1167.09 66.2676 1197.53 47.2606C1227.96 28.2536 1225.78 23.2186 1239.27 12.9649C1252.76 2.7112 1269.32 -9.47929 1282.88 -28.5587C1296.44 -47.6381 1305.81 -41.3853 1323.82 -62.7027C1341.83 -84.0202 1340.32 -82.3794 1368.98 -98.9326",
   ];
 
+  // Darker, rich hex colors for high contrast
   const colors = [
-    "#46A5CA",
-    "#8C2F2F",
-    "#4FAE4D",
-    "#D6590C",
-    "#811010",
-    "#247AFB",
-    "#A534A0",
-    "#A8A438",
-    "#D6590C",
-    "#46A29C",
-    "#670F6D",
-    "#D7C200",
-    "#59BBEB",
-    "#504F1C",
-    "#55BC54",
-    "#4D3568",
-    "#9F39A5",
-    "#363636",
-    "#860909",
-    "#6A286F",
-    "#604483",
+    "#0369A1", // Dark cyan / blue
+    "#B91C1C", // Dark red
+    "#15803D", // Dark green
+    "#C2410C", // Dark orange
+    "#BE123C", // Dark rose / crimson
+    "#1D4ED8", // Deep blue
+    "#6D28D9", // Dark purple
+    "#B45309", // Dark amber
+    "#C2410C", // Deep orange
+    "#0F766E", // Dark teal
+    "#7E22CE", // Dark violet
+    "#A16207", // Dark gold
+    "#0369A1", // Dark blue-cyan
+    "#4D7C0F", // Dark lime
+    "#047857", // Dark emerald
+    "#4338CA", // Dark indigo
+    "#BE185D", // Dark pink
+    "#334155", // Dark slate
+    "#991B1B", // Deep red
+    "#A21CAF", // Dark fuchsia
+    "#3730A3", // Deep indigo
   ];
 
   return (
@@ -85,13 +86,13 @@ const SVG = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="absolute inset-0 w-full h-full">
+      className="absolute inset-0 w-full h-full pointer-events-none">
       {paths.map((path, idx) => (
         <motion.path
           d={path}
-          stroke={colors[idx]}
+          stroke={colors[idx % colors.length]}
           strokeLinecap="round"
-          className="stroke-[4.5] md:stroke-[2.3]"
+          className="stroke-[3.5] md:stroke-[2]"
           variants={pathVariants}
           initial="initial"
           animate="animate"
@@ -105,13 +106,12 @@ const SVG = ({
           }}
           key={`path-first-${idx}`} />
       ))}
-      {/* duplicate for more paths */}
       {paths.map((path, idx) => (
         <motion.path
           d={path}
-          stroke={colors[idx]}
+          stroke={colors[idx % colors.length]}
           strokeLinecap="round"
-          className="stroke-[4.5] md:stroke-[2.3]"
+          className="stroke-[3.5] md:stroke-[2]"
           variants={pathVariants}
           initial="initial"
           animate="animate"
