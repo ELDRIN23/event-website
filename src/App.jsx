@@ -28,7 +28,7 @@ import { BackgroundLines } from "./components/ui/background-lines";
 // Import the hero illustration from inside src/images/
 import heroIllustrationUrl from "../images/illustration.png";
 
-// WorldMap Component with expanded global connecting arcs
+// WorldMap Component with responsive height (smaller on desktop, fully visible on mobile)
 function WorldMap({
   dots = [],
   lineColor = "#0ea5e9"
@@ -37,8 +37,8 @@ function WorldMap({
   const map = new DottedMap({ height: 100, grid: "diagonal" });
 
   const svgMap = map.getSVG({
-    radius: 0.22,
-    color: "#FFFFFF40",
+    radius: 0.25,
+    color: "#FFFFFF90",
     shape: "circle",
     backgroundColor: "black",
   });
@@ -56,18 +56,19 @@ function WorldMap({
   };
 
   return (
-    <div className="w-full aspect-[2/1] bg-black rounded-3xl relative font-sans overflow-hidden border border-slate-800 shadow-xl p-4">
+    <div className="w-full aspect-[2/1] sm:aspect-[2.4/1] md:aspect-[2.8/1] bg-black rounded-3xl relative font-sans overflow-hidden border border-slate-800 shadow-xl p-3 sm:p-4">
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-        className="h-full w-full object-cover [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none opacity-90"
+        className="h-full w-full object-cover [mask-image:linear-gradient(to_bottom,transparent,white_5%,white_95%,transparent)] pointer-events-none select-none opacity-100"
         alt="world map"
-        height="495"
-        width="1056"
+        height="400"
+        width="800"
         draggable={false}
       />
       <svg
         ref={svgRef}
         viewBox="0 0 800 400"
+        preserveAspectRatio="xMidYMid slice"
         className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
         {dots.map((dot, i) => {
@@ -79,7 +80,7 @@ function WorldMap({
                 d={createCurvedPath(startPoint, endPoint)}
                 fill="none"
                 stroke="url(#path-gradient)"
-                strokeWidth="1.5"
+                strokeWidth="2"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
                 transition={{
@@ -111,27 +112,27 @@ function WorldMap({
               <circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="3"
+                r="3.5"
                 fill={lineColor}
               />
               <circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="3"
+                r="3.5"
                 fill={lineColor}
-                opacity="0.5"
+                opacity="0.6"
               >
                 <animate
                   attributeName="r"
-                  from="3"
-                  to="10"
+                  from="3.5"
+                  to="12"
                   dur="1.5s"
                   begin="0s"
                   repeatCount="indefinite"
                 />
                 <animate
                   attributeName="opacity"
-                  from="0.5"
+                  from="0.6"
                   to="0"
                   dur="1.5s"
                   begin="0s"
@@ -143,27 +144,27 @@ function WorldMap({
               <circle
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="3"
+                r="3.5"
                 fill={lineColor}
               />
               <circle
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="3"
+                r="3.5"
                 fill={lineColor}
-                opacity="0.5"
+                opacity="0.6"
               >
                 <animate
                   attributeName="r"
-                  from="3"
-                  to="10"
+                  from="3.5"
+                  to="12"
                   dur="1.5s"
                   begin="0s"
                   repeatCount="indefinite"
                 />
                 <animate
                   attributeName="opacity"
-                  from="0.5"
+                  from="0.6"
                   to="0"
                   dur="1.5s"
                   begin="0s"
@@ -264,7 +265,6 @@ export default function App() {
   const launchOfferText =
     "!! 🎉 LAUNCH OFFER — GET FLAT 20% OFF ON ALL EVENT WEBSITE CATEGORIES • WEDDINGS • ENGAGEMENTS • BIRTHDAYS • BAPTISMS • HOLY COMMUNIONS • ANNIVERSARIES • BOOK NOW & SAVE • LIMITED TIME OFFER • GRAB IT NOW • !!";
 
-  // Expanded global arc connections matching the reference image layout structure
   const mapDots = [
     {
       start: { lat: 49.2827, lng: -123.1207 }, // Vancouver / West Canada
@@ -451,13 +451,13 @@ export default function App() {
           ))}
         </div>
 
-        {/* WORLD MAP CONTAINER WITH PROFESSIONAL HEADING AND EXPANDED CONNECTING ARCS */}
-        <div className="max-w-7xl mx-auto">
+        {/* WORLD MAP CONTAINER WITH RESPONSIVE SIZING */}
+        <div className="max-w-7xl mx-auto px-2 sm:px-0">
           <div className="text-center mb-8">
             <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2 flex items-center justify-center gap-1.5">
               <Globe size={14} className="text-sky-500" /> Global Reach
             </p>
-            <h3 className="text-2xl md:text-3xl font-serif text-slate-900">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-slate-900 px-4">
               Share your celebration with loved ones across the globe.
             </h3>
           </div>
