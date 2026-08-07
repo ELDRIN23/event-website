@@ -8,90 +8,19 @@
  * modification of this file via any medium is strictly prohibited by law.
  */
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { BackgroundLines } from "./components/ui/background-lines";
-
-// --- CONTINUOUS AMBIENT BACKGROUND PARTICLES COMPONENT ---
-function BackgroundParticlesCanvas() {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationFrameId;
-    const particleCount = 60;
-    let particles = [];
-
-    const colors = ["#f472b6", "#fbbf24", "#fef08a", "#ffffff", "#ec4899"];
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    // Initialize floating background particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: Math.random() * 2.2 + 0.8,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5 - 0.15, // gentle upward floating drift
-        alpha: Math.random() * 0.6 + 0.2,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      });
-    }
-
-    // Continuous Animation Loop (Independent of Scrolling)
-    const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((p) => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        // Wrap around screen edges seamlessly
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
-
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = p.color;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      });
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
-    />
-  );
-}
+import { motion } from "framer-motion";
+import {
+  Heart,
+  Sparkles,
+  Gem,
+  GlassWater,
+  Gift,
+  Music,
+  Camera,
+  PartyPopper,
+} from "lucide-react";
 
 export default function App() {
   const collections = [
@@ -118,7 +47,6 @@ export default function App() {
     },
   ];
 
-  // ALL PLANS SET TO FLAT 20% DISCOUNT WITH EXPLICIT DUMMY & ACTUAL PRICES
   const plans = [
     {
       title: "Starter",
@@ -180,9 +108,11 @@ export default function App() {
   const launchOfferText =
     "!! 🎉 LAUNCH OFFER — GET FLAT 20% OFF ON ALL EVENT WEBSITE CATEGORIES • WEDDINGS • ENGAGEMENTS • BIRTHDAYS • BAPTISMS • HOLY COMMUNIONS • ANNIVERSARIES • BOOK NOW & SAVE • LIMITED TIME OFFER • GRAB IT NOW • !!";
 
+  // Path to your image inside public/ folder
+  const heroIllustrationUrl = "/images/illustration.png";
+
   return (
-    <div className="bg-[#000000] text-white min-h-screen relative selection:bg-pink-500 selection:text-black overflow-x-hidden">
-      {/* CSS KEYFRAMES FOR HARDWARE-ACCELERATED MOBILE MARQUEE & STRIKE-THROUGH ANIMATION */}
+    <div className="bg-[#fafbfc] text-slate-900 min-h-screen relative selection:bg-black selection:text-white overflow-x-hidden font-sans">
       <style>{`
         @keyframes smoothMarquee {
           0% { transform: translate3d(0, 0, 0); }
@@ -208,185 +138,243 @@ export default function App() {
           position: absolute;
           left: -2.5%;
           top: 50%;
-          height: 2.5px;
-          background: #ef4444; /* Vibrant red strike line */
-          box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+          height: 2px;
+          background: #ef4444;
           animation: drawStrike 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
           transform: translateY(-50%) rotate(-3deg);
         }
       `}</style>
 
-      {/* GLOBAL BACKGROUND PARTICLES */}
-      <BackgroundParticlesCanvas />
+      {/* --- FLOATING DECORATIVE BACKGROUND ICONS --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-20">
+        <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute top-[8%] left-[5%] text-slate-800">
+          <Heart size={36} />
+        </motion.div>
+        <motion.div animate={{ y: [0, 20, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute top-[18%] right-[8%] text-slate-800">
+          <Sparkles size={40} />
+        </motion.div>
+        <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 4.5, repeat: Infinity }} className="absolute top-[35%] left-[3%] text-slate-800">
+          <Gem size={32} />
+        </motion.div>
+        <motion.div animate={{ y: [0, 15, 0] }} transition={{ duration: 5.5, repeat: Infinity }} className="absolute top-[48%] right-[4%] text-slate-800">
+          <GlassWater size={36} />
+        </motion.div>
+        <motion.div animate={{ y: [0, -18, 0] }} transition={{ duration: 6.5, repeat: Infinity }} className="absolute top-[65%] left-[6%] text-slate-800">
+          <Music size={34} />
+        </motion.div>
+        <motion.div animate={{ y: [0, 14, 0] }} transition={{ duration: 4.8, repeat: Infinity }} className="absolute top-[78%] right-[5%] text-slate-800">
+          <PartyPopper size={38} />
+        </motion.div>
+        <motion.div animate={{ y: [0, -16, 0] }} transition={{ duration: 5.2, repeat: Infinity }} className="absolute top-[90%] left-[8%] text-slate-800">
+          <Gift size={32} />
+        </motion.div>
+      </div>
 
-      {/* HERO SECTION WITH WHATSAPP CTA */}
-      <div className="relative z-10 bg-[#000000] w-full">
-        <BackgroundLines className="min-h-[80vh] md:min-h-[85vh] bg-[#000000] w-full flex items-center justify-center">
-          <section className="min-h-[80vh] md:min-h-[85vh] flex items-center justify-center text-center px-4 sm:px-6 py-12 md:py-20 relative z-10 w-full">
-            <div className="max-w-5xl group [perspective:1000px]">
-              <p className="uppercase tracking-[5px] sm:tracking-[8px] text-pink-300 text-xs md:text-sm mb-4 font-semibold animate-pulse">
-                Make Your Presence Online
-              </p>
+      {/* HERO SECTION */}
+      <div className="relative z-10 bg-white w-full border-b border-slate-200/60 overflow-hidden">
+        <section className="min-h-[80vh] md:min-h-[85vh] flex items-center justify-between px-6 md:px-16 py-12 md:py-20 max-w-7xl mx-auto relative z-10 w-full">
+          <div className="max-w-2xl text-left">
+            <p className="uppercase tracking-[4px] sm:tracking-[6px] text-slate-500 text-xs md:text-sm mb-4 font-semibold flex items-center gap-2">
+              <Sparkles size={16} className="text-amber-500" />
+              Make Your Presence Online
+            </p>
 
-              <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif mb-6 leading-tight tracking-tight drop-shadow-[0_10px_20px_rgba(244,114,182,0.15)] transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateX(4deg)_translateZ(10px)]">
-                Beautiful Websites
-                <br />
-                <span className="bg-gradient-to-r from-white via-pink-200 to-pink-400 bg-clip-text text-transparent">
-                  For Every Celebration
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif mb-6 leading-tight tracking-tight text-slate-900">
+              Beautiful Websites
+              <br />
+              <span className="text-black font-semibold flex items-center gap-3">
+                For Every Celebration
+                <Heart className="inline text-rose-500 fill-rose-500" size={40} />
+              </span>
+            </h1>
+
+            <p className="text-slate-600 text-sm sm:text-base md:text-lg font-normal tracking-wide max-w-xl mb-10">
+              Weddings • Birthdays • Baptisms • Holy Communion • Anniversaries •
+              All religious festivals & functions
+            </p>
+
+            <div className="flex justify-start">
+              <a
+                href="https://wa.me/919061014915"
+                target="_blank"
+                rel="noreferrer"
+                style={{ backgroundColor: "#15803d", color: "#ffffff" }}
+                className="inline-flex items-center gap-2.5 !bg-green-700 hover:!bg-green-800 !text-white font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300 text-sm sm:text-base cursor-pointer pointer-events-auto"
+              >
+                <svg className="w-5 h-5 fill-white text-white" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.842-.981z" />
+                </svg>
+                <span style={{ color: "#ffffff" }} className="!text-white font-bold">
+                  WhatsApp Enquiry
                 </span>
-              </h1>
-
-              <p className="text-gray-400 text-sm sm:text-base md:text-xl font-light tracking-wide max-w-2xl mx-auto px-2 mb-8">
-                Weddings • Birthdays • Baptisms • Holy Communion • Anniversaries •
-                All religious festivals & functions
-              </p>
-
-              {/* GREEN WHATSAPP HERO BUTTON WITH GUARANTEED BLACK TEXT */}
-              <div className="flex justify-center">
-                <a
-                  href="https://wa.me/919061014915"
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ color: "#000000" }}
-                  className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#20ba5a] text-black font-extrabold px-7 py-3.5 rounded-full shadow-[0_0_25px_rgba(37,211,102,0.4)] hover:scale-105 transition-all duration-300 text-sm sm:text-base cursor-pointer"
-                >
-                  <svg
-                    className="w-5 h-5 fill-black text-black"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.842-.981z" />
-                  </svg>
-                  <span style={{ color: "#000000" }} className="text-black font-extrabold">
-                    WhatsApp Enquiry
-                  </span>
-                </a>
-              </div>
+              </a>
             </div>
-          </section>
-        </BackgroundLines>
+          </div>
+
+          {/* SEAMLESSLY BLENDED HERO IMAGE */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="hidden lg:flex items-center justify-center w-1/2 pl-12 relative"
+          >
+            {/* Soft Ambient Radial Glow Behind Image */}
+            <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-amber-200/30 via-rose-100/40 to-slate-100/50 blur-3xl rounded-full scale-110 pointer-events-none" />
+
+            <motion.img
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              src={heroIllustrationUrl}
+              alt="Bride and Groom Illustration"
+              className="w-full max-w-lg h-auto object-contain mix-blend-multiply opacity-95 [mask-image:radial-gradient(ellipse_at_center,black_75%,transparent_100%)]"
+            />
+          </motion.div>
+        </section>
       </div>
 
       {/* LAUNCH OFFER MARQUEE */}
-      <section className="bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 py-3 relative z-10 shadow-[0_0_25px_rgba(245,158,11,0.3)] overflow-hidden">
+      <section className="bg-black text-white py-3.5 relative z-10 border-b border-slate-800 overflow-hidden">
         <div className="animate-smooth-marquee">
-          <span
-            style={{ color: "#000000" }}
-            className="text-black font-black uppercase text-xs md:text-sm tracking-wider whitespace-nowrap pr-8"
-          >
+          <span className="text-white font-bold uppercase text-xs md:text-sm tracking-widest whitespace-nowrap pr-8">
             {launchOfferText}
           </span>
-          <span
-            style={{ color: "#000000" }}
-            className="text-black font-black uppercase text-xs md:text-sm tracking-wider whitespace-nowrap pr-8"
-          >
+          <span className="text-white font-bold uppercase text-xs md:text-sm tracking-widest whitespace-nowrap pr-8">
             {launchOfferText}
           </span>
         </div>
       </section>
 
       {/* DEMO COLLECTIONS */}
-      <section className="py-12 md:py-24 px-4 sm:px-6 md:px-16 relative z-10">
-        <div className="text-center mb-8 md:mb-16">
-          <p className="uppercase tracking-[4px] text-pink-300 text-xs font-semibold mb-2">
-            Curated Themes
+      <section className="py-16 md:py-24 px-4 sm:px-6 md:px-16 relative z-10">
+        <div className="text-center mb-12 md:mb-16">
+          <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2 flex items-center justify-center gap-1.5">
+            <Camera size={14} /> Curated Themes
           </p>
-          <h2 className="text-3xl md:text-5xl font-serif">Demo Collections</h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">Demo Collections</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md sm:max-w-7xl mx-auto">
           {collections.map((item, index) => (
-            <div
+            <motion.div
               key={index}
-              className="group [perspective:1000px] cursor-pointer"
+              whileHover={{
+                y: -8,
+                boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.04)",
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="bg-[#f3f4f6] rounded-2xl overflow-hidden border border-slate-300/70 shadow-sm transition-all duration-300 flex flex-col relative"
             >
-              <div className="bg-[#050505]/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(8deg)_rotateY(-4deg)_translateZ(20px)] group-hover:border-pink-300/50 group-hover:shadow-[0_20px_50px_rgba(244,114,182,0.2)]">
-                <div className="overflow-hidden relative aspect-[16/10] sm:aspect-auto sm:h-64">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
-                </div>
+              <div className="overflow-hidden relative aspect-[16/10] sm:aspect-auto sm:h-64 bg-slate-200">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
 
-                <div className="p-5 sm:p-8 relative">
-                  <h3 className="text-lg sm:text-2xl font-serif mb-2 sm:mb-3 text-white group-hover:text-pink-300 transition-colors">
+              <div className="p-6 sm:p-8 relative flex flex-col flex-grow justify-between">
+                <div>
+                  <h3 className="text-xl font-serif mb-2 text-slate-900 font-bold flex items-center justify-between">
                     {item.title}
+                    <Heart size={18} className="text-slate-400 hover:text-rose-500 cursor-pointer transition-colors" />
                   </h3>
-                  <p className="text-gray-400 mb-5 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-slate-600 mb-6 text-xs sm:text-sm leading-relaxed">
                     {item.description}
                   </p>
-                  <Link to={item.route} className="block">
-                    <button className="w-full sm:w-auto bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 py-2.5 sm:py-3 rounded-full font-semibold text-xs sm:text-sm hover:scale-105 transition-all shadow-lg hover:shadow-pink-500/25">
-                      View Collection
-                    </button>
-                  </Link>
                 </div>
+                <Link to={item.route} className="block mt-auto">
+                  <button className="w-full bg-black text-white px-6 py-3 rounded-xl font-medium text-xs sm:text-sm hover:bg-slate-800 transition-all shadow-sm">
+                    View Collection
+                  </button>
+                </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* PRICING SECTION WITH 20% DISCOUNT RIBBON TAGS & STRIKE-THROUGH DUMMY PRICES */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-white/5">
+      {/* PRICING SECTION */}
+      <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-slate-200/60 bg-white">
         <div className="text-center mb-12 md:mb-16">
-          <p className="uppercase tracking-[4px] text-pink-300 text-xs font-semibold mb-2">
-            Transparent Rates
+          <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2 flex items-center justify-center gap-1.5">
+            <Gem size={14} /> Transparent Rates
           </p>
 
-          <h2 className="text-3xl md:text-5xl font-serif">Pricing Plans</h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">Pricing Plans</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
           {plans.map((plan, index) => (
-            <div key={index} className="group [perspective:1000px] h-full">
-              <div className="relative h-full flex flex-col bg-[#050505]/90 backdrop-blur-sm border border-white/10 rounded-3xl p-6 sm:p-8 pt-10 sm:pt-12 transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(6deg)_translateZ(20px)] group-hover:border-pink-300/40 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.9)] overflow-hidden">
-                
-                {/* LEFT-SIDE 20% DISCOUNT RIBBON TAG */}
-                <div className="absolute top-4 left-0 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black text-[11px] sm:text-xs px-3.5 py-1 rounded-r-full shadow-[0_0_15px_rgba(244,114,182,0.5)] tracking-wider z-20 flex items-center gap-1">
-                  <span>🏷️</span> {plan.discount}
+            <motion.div
+              key={index}
+              whileHover={{
+                y: -8,
+                boxShadow: "0 25px 35px -12px rgba(0, 0, 0, 0.15), 0 10px 20px -5px rgba(0, 0, 0, 0.05)",
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="h-full rounded-2xl overflow-hidden"
+            >
+              <div className="relative h-full flex flex-col bg-[#f3f4f6] border border-slate-300/80 rounded-2xl p-6 sm:p-8 pt-10 sm:pt-12 shadow-sm transition-all duration-300">
+                <div className="absolute top-4 left-0 bg-black text-white font-bold text-[11px] sm:text-xs px-3.5 py-1 rounded-r-full shadow-sm tracking-wider z-20 flex items-center gap-1">
+                  <Gift size={12} /> {plan.discount}
                 </div>
 
                 {plan.highlight && (
-                  <span className="text-[10px] font-mono tracking-widest uppercase bg-pink-400 text-black px-3 py-1 rounded-full font-bold mb-4 inline-block w-fit self-end">
+                  <span className="text-[10px] font-mono tracking-widest uppercase bg-black text-white px-3 py-1 rounded-full font-semibold mb-4 inline-block w-fit self-end">
                     Most Popular
                   </span>
                 )}
 
-                <h3 className="text-xl sm:text-2xl font-serif mb-3 text-white mt-2">
+                <h3 className="text-xl sm:text-2xl font-serif mb-3 text-slate-900 font-bold mt-2">
                   {plan.title}
                 </h3>
 
-                {/* PRICE DISPLAY WITH ANIMATED STRIKE-THROUGH DUMMY PRICE */}
                 <div className="flex items-baseline gap-3 mb-4">
-                  <span className="animated-strike text-gray-500 text-lg sm:text-xl font-medium">
+                  <span className="animated-strike text-slate-400 text-lg sm:text-xl font-medium">
                     {plan.originalPrice}
                   </span>
-                  <span className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-200 to-pink-400 bg-clip-text text-transparent">
+                  <span className="text-3xl sm:text-4xl font-bold text-slate-900">
                     {plan.price}
                   </span>
                 </div>
 
-                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed flex-grow">
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed flex-grow">
                   {plan.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
+        </div>
+
+        <div className="max-w-4xl mx-auto mt-16 bg-[#f3f4f6] border border-slate-300/80 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="text-left">
+            <h4 className="text-xl font-serif font-bold text-slate-900 mb-1 flex items-center gap-2">
+              <GlassWater size={20} className="text-amber-600" />
+              Customized Design Options
+            </h4>
+            <p className="text-slate-600 text-xs sm:text-sm">
+              Looking for tailored custom features or specific design theme options?
+            </p>
+          </div>
+          <div className="w-40 h-28 bg-white border border-slate-300/60 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
+            <img
+              src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=600&auto=format&fit=crop"
+              alt="Standing Bride and Groom"
+              className="w-full h-full object-cover grayscale opacity-90 rounded-lg"
+            />
+          </div>
         </div>
       </section>
 
       {/* PROCEDURE & TIMELINE SECTION */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto relative z-10 border-t border-white/5">
+      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto relative z-10 border-t border-slate-200/60">
         <div className="text-center mb-12 md:mb-16">
-          <p className="uppercase tracking-[4px] text-pink-300 text-xs font-semibold mb-2">
+          <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2">
             Simple & Seamless Process
           </p>
-          <h2 className="text-3xl md:text-5xl font-serif">How It Works</h2>
-          <p className="text-gray-400 mt-3 max-w-xl mx-auto text-xs sm:text-base">
-            From initial idea to live website launch in 4 clear, hassle-free
-            steps.
+          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">How It Works</h2>
+          <p className="text-slate-600 mt-3 max-w-xl mx-auto text-xs sm:text-base">
+            From initial idea to live website launch in 4 clear, hassle-free steps.
           </p>
         </div>
 
@@ -394,35 +382,36 @@ export default function App() {
           {processSteps.map((step, idx) => {
             const isEven = idx % 2 === 0;
             return (
-              <li key={idx} className="group [perspective:1000px]">
-                {idx !== 0 && <hr className="bg-pink-300/20" />}
+              <li key={idx}>
+                {idx !== 0 && <hr className="bg-slate-200" />}
 
                 <div className="timeline-middle z-10 my-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-pink-300 to-pink-500 text-black font-black flex items-center justify-center text-xs sm:text-sm shadow-[0_0_20px_rgba(244,114,182,0.5)] border-2 border-black group-hover:scale-125 transition-transform duration-300">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black text-white font-bold flex items-center justify-center text-xs sm:text-sm shadow-md border-2 border-white">
                     {step.step}
                   </div>
                 </div>
 
-                <div
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
                   className={`${
                     isEven
                       ? "timeline-start md:text-end mb-8 md:mb-12"
                       : "timeline-end mb-8 md:mb-12"
-                  } p-6 sm:p-8 bg-[#050505]/90 backdrop-blur-sm border border-white/10 rounded-3xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(4deg)_rotateY(-2deg)_translateZ(15px)] group-hover:border-pink-300/40 group-hover:shadow-[0_20px_40px_rgba(244,114,182,0.15)] max-w-lg`}
+                  } p-6 sm:p-8 bg-[#f3f4f6] border border-slate-300/80 rounded-2xl shadow-sm transition-all duration-300 max-w-lg`}
                 >
-                  <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-pink-300 bg-pink-950/40 border border-pink-500/30 px-3 py-1 rounded-full inline-block mb-3">
+                  <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-700 bg-white border border-slate-200 px-3 py-1 rounded-full inline-block mb-3">
                     {step.phase}
                   </span>
-                  <h3 className="text-lg sm:text-2xl font-serif font-bold text-white mb-2">
+                  <h3 className="text-lg sm:text-2xl font-serif font-bold text-slate-900 mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-gray-400 text-xs sm:text-base leading-relaxed font-light">
+                  <p className="text-slate-600 text-xs sm:text-base leading-relaxed font-normal">
                     {step.description}
                   </p>
-                </div>
+                </motion.div>
 
                 {idx !== processSteps.length - 1 && (
-                  <hr className="bg-pink-300/20" />
+                  <hr className="bg-slate-200" />
                 )}
               </li>
             );
@@ -431,36 +420,49 @@ export default function App() {
       </section>
 
       {/* REFER & EARN SECTION */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-white/5">
-        <div className="max-w-5xl mx-auto text-center bg-[#050505]/90 backdrop-blur-sm border border-white/10 rounded-3xl p-6 sm:p-14 group [perspective:1000px] hover:border-pink-300/40 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
-          <h2 className="text-3xl md:text-5xl font-serif mb-4">Refer & Earn</h2>
+      <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-slate-200/60 bg-white">
+        <motion.div 
+          whileHover={{ boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.1)" }}
+          className="max-w-5xl mx-auto text-center bg-[#f3f4f6] border border-slate-300/80 rounded-3xl p-6 sm:p-14 shadow-sm transition-all duration-300 relative overflow-hidden"
+        >
+          <div className="hidden md:block absolute -right-6 -bottom-6 w-44 h-36 bg-white border border-slate-300/70 rounded-2xl p-2 shadow-sm rotate-6 opacity-85">
+            <img
+              src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop"
+              alt="Groom carrying bride"
+              className="w-full h-full object-cover grayscale rounded-lg"
+            />
+          </div>
 
-          <p className="text-gray-300 text-sm md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+          <h2 className="text-3xl md:text-5xl font-serif text-slate-900 mb-4 flex items-center justify-center gap-3">
+            <PartyPopper className="text-amber-600" /> Refer & Earn
+          </h2>
+
+          <p className="text-slate-600 text-sm md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
             Know someone planning a wedding, birthday, baptism, holy communion,
             anniversary, or any special event? Refer them to us and earn a
             commission when their website project is successfully completed.
           </p>
 
           <div className="mt-8">
-            <span className="inline-block bg-gradient-to-r from-pink-200 to-pink-400 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-xl font-bold shadow-[0_10px_25px_rgba(244,114,182,0.3)] hover:scale-105 transition-transform">
+            <span className="inline-block bg-black text-white px-8 py-4 rounded-full text-base sm:text-lg font-bold shadow-md hover:bg-slate-800 transition-all">
               Earn 10% Referral Commission
             </span>
           </div>
 
-          <p className="text-gray-500 mt-6 text-[10px] sm:text-xs tracking-wider uppercase">
+          <p className="text-slate-400 mt-6 text-[10px] sm:text-xs tracking-wider uppercase font-medium">
             Referral rewards are provided after successful project confirmation
             and payment completion.
           </p>
-        </div>
+        </motion.div>
       </section>
 
-      {/* CONTACT SECTION WITH WHATSAPP ENQUIRY */}
-      <section className="py-16 md:py-24 text-center px-4 sm:px-6 relative z-10 border-t border-white/5">
-        <h2 className="text-3xl md:text-5xl font-serif mb-4">
+      {/* CONTACT SECTION */}
+      <section className="py-16 md:py-24 text-center px-4 sm:px-6 relative z-10 border-t border-slate-200/60">
+        <h2 className="text-3xl md:text-5xl font-serif text-slate-900 mb-4">
           Let's Build Something Beautiful
         </h2>
 
-        <p className="text-gray-400 mb-8 text-xs sm:text-base">
+        <p className="text-slate-600 mb-8 text-xs sm:text-base">
           Contact us to start creating your custom event website.
         </p>
 
@@ -470,11 +472,16 @@ export default function App() {
           rel="noreferrer"
           className="inline-block"
         >
-          <button
-            style={{ color: "#000000" }}
-            className="bg-[#25D366] hover:bg-[#20ba5a] text-black px-8 sm:px-10 py-3 sm:py-4 rounded-full font-extrabold text-sm sm:text-base hover:scale-110 transition-transform duration-300 shadow-[0_0_30px_rgba(37,211,102,0.4)]"
+          <button 
+            style={{ backgroundColor: "#15803d", color: "#ffffff" }}
+            className="!bg-green-700 hover:!bg-green-800 !text-white px-9 py-4 rounded-full font-bold text-sm sm:text-base hover:scale-105 transition-transform duration-300 shadow-lg cursor-pointer inline-flex items-center gap-2"
           >
-            WhatsApp Enquiry
+            <svg className="w-5 h-5 fill-white text-white" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.842-.981z" />
+            </svg>
+            <span style={{ color: "#ffffff" }} className="!text-white font-bold">
+              WhatsApp Enquiry
+            </span>
           </button>
         </a>
       </section>

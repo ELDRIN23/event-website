@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BottomNav from "../components/BottomNav";
 import ScrollToTop from "../components/ScrollToTop";
-import BackgroundParticles from "../components/BackgroundParticles";
+// import BackgroundParticles from "../components/BackgroundParticles";
 
 export default function Layout() {
   const location = useLocation();
@@ -17,7 +17,7 @@ export default function Layout() {
   return (
     <div className="bg-[#000000] text-white min-h-screen relative selection:bg-pink-500 selection:text-black overflow-x-hidden">
       {/* 🌟 GLOBAL 3D BACKGROUND PARTICLES (PERSISTS ACROSS ALL ROUTES) */}
-      <BackgroundParticles />
+      {/* <BackgroundParticles /> */}
 
       {/* HEADER & NAVIGATION */}
       <div className="relative z-10">
