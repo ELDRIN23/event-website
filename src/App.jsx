@@ -25,7 +25,8 @@ import {
 import { BackgroundLines } from "./components/ui/background-lines";
 import { WorldMap } from "./components/ui/world-map";
 
-
+// Import the hero illustration from inside src/images/
+import heroIllustrationUrl from "../images/illustration.png";
 
 export default function App() {
   const collections = [
@@ -113,9 +114,6 @@ export default function App() {
   const launchOfferText =
     "!! 🎉 LAUNCH OFFER — GET FLAT 20% OFF ON ALL EVENT WEBSITE CATEGORIES • WEDDINGS • ENGAGEMENTS • BIRTHDAYS • BAPTISMS • HOLY COMMUNIONS • ANNIVERSARIES • BOOK NOW & SAVE • LIMITED TIME OFFER • GRAB IT NOW • !!";
 
-  // Path to your image inside public/ folder
-  const heroIllustrationUrl = "/images/illustration.png";
-
   return (
     <div className="bg-[#fafbfc] text-slate-900 min-h-screen relative selection:bg-black selection:text-white overflow-x-hidden font-sans">
       <style>{`
@@ -150,12 +148,8 @@ export default function App() {
         }
       `}</style>
 
-      {/* HERO SECTION - Now wrapped in BackgroundLines */}
-      {/* We keep the inner white background div, but the animation from BackgroundLines will render */}
-      {/* behind the content because of relative positioning. */}
+      {/* HERO SECTION */}
       <div className="relative z-10 bg-white w-full border-b border-slate-200/60 overflow-hidden">
-        
-        {/* Use the demo animation as a subtle background. Pointer-events are disabled so text is selectable */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
            <BackgroundLines className="w-full h-full" />
         </div>
@@ -206,7 +200,6 @@ export default function App() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="hidden lg:flex items-center justify-center w-1/2 pl-12 relative z-10"
           >
-            {/* Soft Ambient Radial Glow Behind Image */}
             <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-amber-200/30 via-rose-100/40 to-slate-100/50 blur-3xl rounded-full scale-110 pointer-events-none" />
 
             <motion.img
@@ -280,41 +273,6 @@ export default function App() {
           ))}
         </div>
       </section>
-
-      {/* WORLD MAP SECTION
-      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto relative z-10 border-t border-slate-200/60">
-        <div className="text-center mb-12 md:mb-16">
-          <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2">
-            Global Reach
-          </p>
-          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">
-            Clients Around the World
-          </h2>
-          <p className="text-slate-600 mt-3 max-w-xl mx-auto text-xs sm:text-base">
-            Delivering bespoke event websites across borders and time zones.
-          </p>
-        </div>
-
-        <div className="bg-[#f3f4f6] border border-slate-300/80 rounded-3xl p-4 sm:p-8 shadow-sm">
-          <WorldMap
-            lineColor="#000000"
-            dots={[
-              {
-                start: { lat: 10.5276, lng: 76.2144 }, // Thrissur, Kerala
-                end: { lat: 25.2048, lng: 55.2708 },   // Dubai, UAE
-              },
-              {
-                start: { lat: 10.5276, lng: 76.2144 }, // Thrissur, Kerala
-                end: { lat: 40.7128, lng: -74.0060 },  // New York, USA
-              },
-              {
-                start: { lat: 10.5276, lng: 76.2144 }, // Thrissur, Kerala
-                end: { lat: 51.5074, lng: -0.1278 },   // London, UK
-              },
-            ]}
-          />
-        </div>
-      </section> */}
 
       {/* PRICING SECTION */}
       <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-slate-200/60 bg-white">
