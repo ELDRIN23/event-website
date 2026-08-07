@@ -455,7 +455,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-2 sm:px-0">
           <div className="text-center mb-8">
             <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2 flex items-center justify-center gap-1.5">
-              <Globe size={14} className="text-sky-500" /> Global Reach
+              <Globe size={14} className="text-sky-500" /> Global presence
             </p>
             <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-slate-900 px-4">
               Share your celebration with loved ones across the globe.
