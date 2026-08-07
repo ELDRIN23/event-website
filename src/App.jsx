@@ -8,25 +8,175 @@
  * modification of this file via any medium is strictly prohibited by law.
  */
 
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import DottedMap from "dotted-map";
 import {
   Heart,
   Sparkles,
   Gem,
   GlassWater,
   Gift,
-  Music,
   Camera,
   PartyPopper,
+  Globe,
 } from "lucide-react";
 // Import the BackgroundLines component
 import { BackgroundLines } from "./components/ui/background-lines";
-import { WorldMap } from "./components/ui/world-map";
 
 // Import the hero illustration from inside src/images/
 import heroIllustrationUrl from "../images/illustration.png";
+
+// WorldMap Component with expanded global connecting arcs
+function WorldMap({
+  dots = [],
+  lineColor = "#0ea5e9"
+}) {
+  const svgRef = useRef(null);
+  const map = new DottedMap({ height: 100, grid: "diagonal" });
+
+  const svgMap = map.getSVG({
+    radius: 0.22,
+    color: "#FFFFFF40",
+    shape: "circle",
+    backgroundColor: "black",
+  });
+
+  const projectPoint = (lat, lng) => {
+    const x = (lng + 180) * (800 / 360);
+    const y = (90 - lat) * (400 / 180);
+    return { x, y };
+  };
+
+  const createCurvedPath = (start, end) => {
+    const midX = (start.x + end.x) / 2;
+    const midY = Math.min(start.y, end.y) - 50;
+    return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
+  };
+
+  return (
+    <div className="w-full aspect-[2/1] bg-black rounded-3xl relative font-sans overflow-hidden border border-slate-800 shadow-xl p-4">
+      <img
+        src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
+        className="h-full w-full object-cover [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none opacity-90"
+        alt="world map"
+        height="495"
+        width="1056"
+        draggable={false}
+      />
+      <svg
+        ref={svgRef}
+        viewBox="0 0 800 400"
+        className="w-full h-full absolute inset-0 pointer-events-none select-none"
+      >
+        {dots.map((dot, i) => {
+          const startPoint = projectPoint(dot.start.lat, dot.start.lng);
+          const endPoint = projectPoint(dot.end.lat, dot.end.lng);
+          return (
+            <g key={`path-group-${i}`}>
+              <motion.path
+                d={createCurvedPath(startPoint, endPoint)}
+                fill="none"
+                stroke="url(#path-gradient)"
+                strokeWidth="1.5"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{
+                  duration: 1.5,
+                  delay: 0.2 * i,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  repeatDelay: 1,
+                }}
+                key={`start-upper-${i}`}
+              />
+            </g>
+          );
+        })}
+
+        <defs>
+          <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="white" stopOpacity="0" />
+            <stop offset="5%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="95%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        {dots.map((dot, i) => (
+          <g key={`points-group-${i}`}>
+            <g key={`start-${i}`}>
+              <circle
+                cx={projectPoint(dot.start.lat, dot.start.lng).x}
+                cy={projectPoint(dot.start.lat, dot.start.lng).y}
+                r="3"
+                fill={lineColor}
+              />
+              <circle
+                cx={projectPoint(dot.start.lat, dot.start.lng).x}
+                cy={projectPoint(dot.start.lat, dot.start.lng).y}
+                r="3"
+                fill={lineColor}
+                opacity="0.5"
+              >
+                <animate
+                  attributeName="r"
+                  from="3"
+                  to="10"
+                  dur="1.5s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  from="0.5"
+                  to="0"
+                  dur="1.5s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </g>
+            <g key={`end-${i}`}>
+              <circle
+                cx={projectPoint(dot.end.lat, dot.end.lng).x}
+                cy={projectPoint(dot.end.lat, dot.end.lng).y}
+                r="3"
+                fill={lineColor}
+              />
+              <circle
+                cx={projectPoint(dot.end.lat, dot.end.lng).x}
+                cy={projectPoint(dot.end.lat, dot.end.lng).y}
+                r="3"
+                fill={lineColor}
+                opacity="0.5"
+              >
+                <animate
+                  attributeName="r"
+                  from="3"
+                  to="10"
+                  dur="1.5s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  from="0.5"
+                  to="0"
+                  dur="1.5s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </g>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
 
 export default function App() {
   const collections = [
@@ -113,6 +263,34 @@ export default function App() {
 
   const launchOfferText =
     "!! 🎉 LAUNCH OFFER — GET FLAT 20% OFF ON ALL EVENT WEBSITE CATEGORIES • WEDDINGS • ENGAGEMENTS • BIRTHDAYS • BAPTISMS • HOLY COMMUNIONS • ANNIVERSARIES • BOOK NOW & SAVE • LIMITED TIME OFFER • GRAB IT NOW • !!";
+
+  // Expanded global arc connections matching the reference image layout structure
+  const mapDots = [
+    {
+      start: { lat: 49.2827, lng: -123.1207 }, // Vancouver / West Canada
+      end: { lat: 37.7749, lng: -122.4194 },   // San Francisco / US West Coast
+    },
+    {
+      start: { lat: 49.2827, lng: -123.1207 }, // Vancouver
+      end: { lat: 43.6532, lng: -79.3832 },   // Toronto / US East Coast
+    },
+    {
+      start: { lat: 43.6532, lng: -79.3832 },   // Toronto
+      end: { lat: -8.8383, lng: 13.2344 },    // Luanda / South America-Africa connection
+    },
+    {
+      start: { lat: 51.5074, lng: -0.1278 },   // London / Europe
+      end: { lat: 25.2048, lng: 55.2708 },   // Dubai / Middle East
+    },
+    {
+      start: { lat: 25.2048, lng: 55.2708 },   // Dubai
+      end: { lat: 10.5276, lng: 76.2144 },   // India (Thrissur / Kerala hub)
+    },
+    {
+      start: { lat: 25.2048, lng: 55.2708 },   // Dubai
+      end: { lat: 35.6762, lng: 139.6503 },  // Tokyo / East Asia
+    },
+  ];
 
   return (
     <div className="bg-[#fafbfc] text-slate-900 min-h-screen relative selection:bg-black selection:text-white overflow-x-hidden font-sans">
@@ -234,7 +412,7 @@ export default function App() {
           <h2 className="text-3xl md:text-5xl font-serif text-slate-900">Demo Collections</h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md sm:max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md sm:max-w-7xl mx-auto mb-16">
           {collections.map((item, index) => (
             <motion.div
               key={index}
@@ -271,6 +449,19 @@ export default function App() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* WORLD MAP CONTAINER WITH PROFESSIONAL HEADING AND EXPANDED CONNECTING ARCS */}
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2 flex items-center justify-center gap-1.5">
+              <Globe size={14} className="text-sky-500" /> Global Reach
+            </p>
+            <h3 className="text-2xl md:text-3xl font-serif text-slate-900">
+              Share your celebration with loved ones across the globe.
+            </h3>
+          </div>
+          <WorldMap dots={mapDots} lineColor="#0ea5e9" />
         </div>
       </section>
 
