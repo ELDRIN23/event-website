@@ -11,6 +11,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+// import TextLoop from "./components/TextLoop";
 import DottedMap from "dotted-map";
 import {
   Heart,
@@ -29,10 +30,7 @@ import { BackgroundLines } from "./components/ui/background-lines";
 import heroIllustrationUrl from "../images/illustration.png";
 
 // WorldMap Component with responsive height (smaller on desktop, fully visible on mobile)
-function WorldMap({
-  dots = [],
-  lineColor = "#0ea5e9"
-}) {
+function WorldMap({ dots = [], lineColor = "#0ea5e9" }) {
   const svgRef = useRef(null);
   const map = new DottedMap({ height: 100, grid: "diagonal" });
 
@@ -268,27 +266,27 @@ export default function App() {
   const mapDots = [
     {
       start: { lat: 49.2827, lng: -123.1207 }, // Vancouver / West Canada
-      end: { lat: 37.7749, lng: -122.4194 },   // San Francisco / US West Coast
+      end: { lat: 37.7749, lng: -122.4194 }, // San Francisco / US West Coast
     },
     {
       start: { lat: 49.2827, lng: -123.1207 }, // Vancouver
-      end: { lat: 43.6532, lng: -79.3832 },   // Toronto / US East Coast
+      end: { lat: 43.6532, lng: -79.3832 }, // Toronto / US East Coast
     },
     {
-      start: { lat: 43.6532, lng: -79.3832 },   // Toronto
-      end: { lat: -8.8383, lng: 13.2344 },    // Luanda / South America-Africa connection
+      start: { lat: 43.6532, lng: -79.3832 }, // Toronto
+      end: { lat: -8.8383, lng: 13.2344 }, // Luanda / South America-Africa connection
     },
     {
-      start: { lat: 51.5074, lng: -0.1278 },   // London / Europe
-      end: { lat: 25.2048, lng: 55.2708 },   // Dubai / Middle East
+      start: { lat: 51.5074, lng: -0.1278 }, // London / Europe
+      end: { lat: 25.2048, lng: 55.2708 }, // Dubai / Middle East
     },
     {
-      start: { lat: 25.2048, lng: 55.2708 },   // Dubai
-      end: { lat: 10.5276, lng: 76.2144 },   // India (Thrissur / Kerala hub)
+      start: { lat: 25.2048, lng: 55.2708 }, // Dubai
+      end: { lat: 10.5276, lng: 76.2144 }, // India (Thrissur / Kerala hub)
     },
     {
-      start: { lat: 25.2048, lng: 55.2708 },   // Dubai
-      end: { lat: 35.6762, lng: 139.6503 },  // Tokyo / East Asia
+      start: { lat: 25.2048, lng: 55.2708 }, // Dubai
+      end: { lat: 35.6762, lng: 139.6503 }, // Tokyo / East Asia
     },
   ];
 
@@ -329,7 +327,7 @@ export default function App() {
       {/* HERO SECTION */}
       <div className="relative z-10 bg-white w-full border-b border-slate-200/60 overflow-hidden">
         <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
-           <BackgroundLines className="w-full h-full" />
+          <BackgroundLines className="w-full h-full" />
         </div>
 
         <section className="min-h-[80vh] md:min-h-[85vh] flex items-center justify-between px-6 md:px-16 py-12 md:py-20 max-w-7xl mx-auto relative z-10 w-full">
@@ -344,7 +342,10 @@ export default function App() {
               <br />
               <span className="text-black font-semibold flex items-center gap-3">
                 For Every Celebration
-                <Heart className="inline text-rose-500 fill-rose-500" size={40} />
+                <Heart
+                  className="inline text-rose-500 fill-rose-500"
+                  size={40}
+                />
               </span>
             </h1>
 
@@ -361,10 +362,16 @@ export default function App() {
                 style={{ backgroundColor: "#15803d", color: "#ffffff" }}
                 className="inline-flex items-center gap-2.5 !bg-green-700 hover:!bg-green-800 !text-white font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300 text-sm sm:text-base cursor-pointer pointer-events-auto"
               >
-                <svg className="w-5 h-5 fill-white text-white" viewBox="0 0 24 24">
+                <svg
+                  className="w-5 h-5 fill-white text-white"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.842-.981z" />
                 </svg>
-                <span style={{ color: "#ffffff" }} className="!text-white font-bold">
+                <span
+                  style={{ color: "#ffffff" }}
+                  className="!text-white font-bold"
+                >
                   WhatsApp Enquiry
                 </span>
               </a>
@@ -409,16 +416,18 @@ export default function App() {
           <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2 flex items-center justify-center gap-1.5">
             <Camera size={14} /> Curated Themes
           </p>
-          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">Demo Collections</h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">
+            Demo Collections
+          </h2>
         </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md sm:max-w-7xl mx-auto mb-16">
           {collections.map((item, index) => (
             <motion.div
               key={index}
               whileHover={{
                 y: -8,
-                boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.04)",
+                boxShadow:
+                  "0 20px 30px -10px rgba(0, 0, 0, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.04)",
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="bg-[#f3f4f6] rounded-2xl overflow-hidden border border-slate-300/70 shadow-sm transition-all duration-300 flex flex-col relative"
@@ -435,7 +444,10 @@ export default function App() {
                 <div>
                   <h3 className="text-xl font-serif mb-2 text-slate-900 font-bold flex items-center justify-between">
                     {item.title}
-                    <Heart size={18} className="text-slate-400 hover:text-rose-500 cursor-pointer transition-colors" />
+                    <Heart
+                      size={18}
+                      className="text-slate-400 hover:text-rose-500 cursor-pointer transition-colors"
+                    />
                   </h3>
                   <p className="text-slate-600 mb-6 text-xs sm:text-sm leading-relaxed">
                     {item.description}
@@ -450,6 +462,23 @@ export default function App() {
             </motion.div>
           ))}
         </div>
+
+      {/* <TextLoop
+          text="Make your loved ones happy"
+          shape="wave"
+          speed={90}
+          direction="forward"
+          separator="✦"
+          curviness={90}
+          fontSize={46}
+          fontWeight={800}
+          letterSpacing={2}
+          uppercase
+          color="#000000"
+          ribbon={false}
+          pauseOnHover
+        /> */}
+
 
         {/* WORLD MAP CONTAINER WITH RESPONSIVE SIZING */}
         <div className="max-w-7xl mx-auto px-2 sm:px-0">
@@ -472,7 +501,9 @@ export default function App() {
             <Gem size={14} /> Transparent Rates
           </p>
 
-          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">Pricing Plans</h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">
+            Pricing Plans
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
@@ -481,7 +512,8 @@ export default function App() {
               key={index}
               whileHover={{
                 y: -8,
-                boxShadow: "0 25px 35px -12px rgba(0, 0, 0, 0.15), 0 10px 20px -5px rgba(0, 0, 0, 0.05)",
+                boxShadow:
+                  "0 25px 35px -12px rgba(0, 0, 0, 0.15), 0 10px 20px -5px rgba(0, 0, 0, 0.05)",
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="h-full rounded-2xl overflow-hidden"
@@ -525,7 +557,8 @@ export default function App() {
               Customized Design Options
             </h4>
             <p className="text-slate-600 text-xs sm:text-sm">
-              Looking for tailored custom features or specific design theme options?
+              Looking for tailored custom features or specific design theme
+              options?
             </p>
           </div>
           <div className="w-40 h-28 bg-white border border-slate-300/60 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
@@ -544,9 +577,12 @@ export default function App() {
           <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2">
             Simple & Seamless Process
           </p>
-          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">How It Works</h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">
+            How It Works
+          </h2>
           <p className="text-slate-600 mt-3 max-w-xl mx-auto text-xs sm:text-base">
-            From initial idea to live website launch in 4 clear, hassle-free steps.
+            From initial idea to live website launch in 4 clear, hassle-free
+            steps.
           </p>
         </div>
 
@@ -593,7 +629,7 @@ export default function App() {
 
       {/* REFER & EARN SECTION */}
       <section className="py-16 md:py-24 px-4 sm:px-6 relative z-10 border-t border-slate-200/60 bg-white">
-        <motion.div 
+        <motion.div
           whileHover={{ boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.1)" }}
           className="max-w-5xl mx-auto text-center bg-[#f3f4f6] border border-slate-300/80 rounded-3xl p-6 sm:p-14 shadow-sm transition-all duration-300 relative overflow-hidden"
         >
@@ -644,14 +680,17 @@ export default function App() {
           rel="noreferrer"
           className="inline-block"
         >
-          <button 
+          <button
             style={{ backgroundColor: "#15803d", color: "#ffffff" }}
             className="!bg-green-700 hover:!bg-green-800 !text-white px-9 py-4 rounded-full font-bold text-sm sm:text-base hover:scale-105 transition-transform duration-300 shadow-lg cursor-pointer inline-flex items-center gap-2"
           >
             <svg className="w-5 h-5 fill-white text-white" viewBox="0 0 24 24">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.842-.981z" />
             </svg>
-            <span style={{ color: "#ffffff" }} className="!text-white font-bold">
+            <span
+              style={{ color: "#ffffff" }}
+              className="!text-white font-bold"
+            >
               WhatsApp Enquiry
             </span>
           </button>
