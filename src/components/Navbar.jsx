@@ -1,3 +1,13 @@
+/**
+ * @authors Eldrin Johnson, Merin Joy
+ * @copyright Copyright (c) 2026 Eldrin Johnson and Merin Joy. All Rights Reserved.
+ * 
+ * PROPRIETARY & CONFIDENTIAL
+ * This source code, component logic, and UI design are the exclusive property 
+ * of Eldrin Johnson and Merin Joy. Unauthorized copying, duplication, distribution, or 
+ * modification of this file via any medium is strictly prohibited by law.
+ */
+
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -52,6 +62,14 @@ export default function Navbar() {
         {/* DESKTOP NAV */}
         <nav className="hidden lg:flex items-center gap-2">
           <Link
+            to="/"
+            style={{ color: "#000000" }}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold !bg-white !text-black hover:!bg-slate-200 hover:scale-105 transition-all shadow-sm"
+          >
+            Home
+          </Link>
+
+          <Link
             to="/family-events"
             style={{ color: "#000000" }}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold !bg-white !text-black hover:!bg-slate-200 hover:scale-105 transition-all shadow-sm"
@@ -74,14 +92,6 @@ export default function Navbar() {
           >
             Weddings
           </Link>
-
-          {/* <Link
-            to="/wedding-demo"
-            style={{ color: "#000000" }}
-            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold !bg-white !text-black hover:!bg-slate-200 hover:scale-105 transition-all shadow-sm flex items-center gap-1"
-          >
-            ✨ Wedding Demo
-          </Link> */}
 
           {/* LIGHT GREEN CONTACT BUTTON */}
           <Link
@@ -122,6 +132,15 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-white/10 bg-black/95 backdrop-blur-xl px-5 py-6 space-y-3">
           <Link
+            to="/"
+            onClick={() => setMobileMenuOpen(false)}
+            style={{ color: "#000000" }}
+            className="block px-4 py-3 rounded-xl text-sm font-bold !bg-white !text-black text-center shadow-sm"
+          >
+            Home
+          </Link>
+
+          <Link
             to="/family-events"
             onClick={() => setMobileMenuOpen(false)}
             style={{ color: "#000000" }}
@@ -147,15 +166,6 @@ export default function Navbar() {
           >
             Weddings
           </Link>
-{/* 
-          <Link
-            to="/wedding-demo"
-            onClick={() => setMobileMenuOpen(false)}
-            style={{ color: "#000000" }}
-            className="block px-4 py-3 rounded-xl text-sm font-bold !bg-white !text-black text-center shadow-sm"
-          >
-            ✨ Wedding Demo
-          </Link> */}
 
           {/* LIGHT GREEN MOBILE CONTACT BUTTON */}
           <Link

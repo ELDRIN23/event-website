@@ -37,14 +37,14 @@ export default function Footer() {
           <FaLinkedin size={20} />
         </a> */}
 
-        <a
+        {/* <a
           href=""
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-pink-400 transition duration-300"
         >
           <FaInstagram size={20} />
-        </a>
+        </a> */}
 
         {/* <a
           href="https://github.com/ELDRIN23"
