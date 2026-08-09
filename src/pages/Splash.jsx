@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Splash() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const startTime = Date.now();
+    const duration = 2000; // Exactly 2 seconds
+
+    const updateProgress = () => {
+      const elapsed = Date.now() - startTime;
+      const currentProgress = Math.min(Math.floor((elapsed / duration) * 100), 100);
+
+      setProgress(currentProgress);
+
+      if (currentProgress < 100) {
+        requestAnimationFrame(updateProgress);
+      }
+    };
+
+    requestAnimationFrame(updateProgress);
+  }, []);
+
   return (
     <div className="fixed inset-0 w-screen h-screen bg-white flex flex-col justify-center items-center z-[9999] font-sans">
       <div className="flex flex-col items-center gap-6">
@@ -16,22 +36,22 @@ export default function Splash() {
 
         {/* Minimal Black & White Progress bar */}
         <div className="w-48 h-1 bg-zinc-200 rounded-full overflow-hidden relative mt-2 border border-zinc-300">
-          <div className="absolute top-0 bottom-0 left-0 bg-black w-1/2 rounded-full animate-[loading_1.5s_infinite_linear]"></div>
+          <div
+            className="absolute top-0 bottom-0 left-0 bg-black rounded-full transition-all duration-75 ease-out"
+            style={{ width: `${progress}%` }}
+          ></div>
         </div>
 
-        {/* Small Note */}
-        <p className="text-[10px] text-zinc-500 tracking-wider mt-1 uppercase font-mono font-bold">
-          Loading experience...
-        </p>
+        {/* Percentage and Note */}
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-xs font-mono font-bold text-black">
+            {progress}%
+          </span>
+          <p className="text-[10px] text-zinc-500 tracking-wider uppercase font-mono font-bold">
+            Loading experience...
+          </p>
+        </div>
       </div>
-      
-      {/* Inline styles for custom loading animation keyframe */}
-      <style>{`
-        @keyframes loading {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(200%); }
-        }
-      `}</style>
     </div>
   );
 }
