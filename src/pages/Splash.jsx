@@ -5,7 +5,7 @@ export default function Splash() {
 
   useEffect(() => {
     const startTime = Date.now();
-    const duration = 2000; // Exactly 2 seconds
+    const duration = 1000; // Exactly 2 seconds
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;

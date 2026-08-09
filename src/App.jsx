@@ -333,7 +333,7 @@ export default function App() {
         <section className="min-h-[80vh] md:min-h-[85vh] flex items-center justify-between px-6 md:px-16 py-12 md:py-20 max-w-7xl mx-auto relative z-10 w-full">
           <div className="max-w-2xl text-left">
             <p className="uppercase tracking-[4px] sm:tracking-[6px] text-slate-500 text-xs md:text-sm mb-4 font-semibold flex items-center gap-2">
-              <Sparkles size={16} className="text-amber-500" />
+              {/* <Sparkles size={16} className="text-amber-500" /> */}
               Make Your Presence Online
             </p>
 
