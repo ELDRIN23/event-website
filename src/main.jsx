@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./index.css";
@@ -12,6 +12,7 @@ import WeddingDemo from "./pages/WeddingDemo";
 import Baptism from "./pages/baptisum";
 import Birthday from "./pages/birthday";
 import HolyCommunion from "./pages/holy-communion";
+import Splash from "./pages/Splash";
 
 // ScrollToTop helper component to reset scroll position on route change
 function ScrollToTop() {
@@ -28,9 +29,23 @@ function ScrollToTop() {
   return null;
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <BrowserRouter>
+// AppWrapper shows the splash screen on initial load, then reveals the app
+function AppWrapper() {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showSplash) {
+    return <Splash />;
+  }
+
+  return (
+    <>
       <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
@@ -53,6 +68,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/wedding-demo" element={<WeddingDemo />} />
         </Route>
       </Routes>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <AppWrapper />
     </BrowserRouter>
   </React.StrictMode>,
-);
+);
