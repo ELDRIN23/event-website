@@ -87,7 +87,7 @@ export default function Contact() {
               <FaWhatsapp size={20} />
             </a>
 
-            <a
+            {/* <a
               href="https://www.linkedin.com/in/eldrin-johnson"
               target="_blank"
               rel="noopener noreferrer"
@@ -95,8 +95,8 @@ export default function Contact() {
               title="LinkedIn"
             >
               <FaLinkedin size={20} />
-            </a>
-
+            </a> */}
+{/* 
             <a
               href="https://www.instagram.com/_e_ldrin/"
               target="_blank"
@@ -105,7 +105,7 @@ export default function Contact() {
               title="Instagram"
             >
               <FaInstagram size={20} />
-            </a>
+            </a> */}
           </div>
         </div>
       </section>
