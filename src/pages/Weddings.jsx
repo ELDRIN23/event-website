@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Heart, Sparkles, Gem, ArrowLeft } from "lucide-react";
@@ -21,22 +19,6 @@ export default function Weddings() {
         </span>
       </div>
 
-      {/* MINIMALIST HEADING SECTION (REPLACED HERO) */}
-      <section className="pt-8 pb-16 px-6 max-w-5xl mx-auto text-center">
-        <p className="uppercase tracking-[4px] text-slate-500 text-xs md:text-sm mb-3 font-semibold flex items-center justify-center gap-2">
-          <Sparkles size={16} className="text-amber-500" />
-          Wedding Collection
-        </p>
-
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif mb-4 text-slate-900 tracking-tight">
-          Wedding Websites
-        </h1>
-
-        <p className="text-slate-600 text-base md:text-lg font-normal max-w-xl mx-auto">
-          Elegant, modern, and memorable digital invitation websites crafted for your special day.
-        </p>
-      </section>
-
       {/* PACKAGES SECTION */}
       <section className="py-12 md:py-20 px-6 max-w-6xl mx-auto">
         <div className="text-center mb-12">
@@ -48,16 +30,26 @@ export default function Weddings() {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch pt-4">
 
           {/* PREMIUM */}
-          <div className="bg-[#f3f4f6] rounded-3xl p-8 sm:p-10 border border-slate-300/80 shadow-sm flex flex-col justify-between transition-all duration-300 hover:shadow-md">
+          <div className="bg-[#f3f4f6] rounded-3xl p-8 sm:p-10 border border-slate-300/80 shadow-sm flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:shadow-md">
+            {/* Ribbon Tag */}
+            <div className="absolute top-0 right-0 transform translate-x-[28%] translate-y-[32%] rotate-45 bg-amber-500 text-black text-[10px] font-bold py-1 px-10 shadow-md uppercase tracking-wider text-center z-10">
+              20% OFF
+            </div>
+
             <div>
-              <h3 className="text-2xl sm:text-3xl font-serif mb-2 text-slate-900 font-bold">
-                Premium
-              </h3>
-              <p className="text-slate-600 text-xs sm:text-sm mb-6">
+              <div className="flex justify-between items-start gap-4 mb-2">
+                <h3 className="text-2xl sm:text-3xl font-serif text-slate-900 font-bold">
+                  Premium
+                </h3>
+              </div>
+              <p className="text-slate-600 text-xs sm:text-sm mb-1">
                 Essential features for a beautiful wedding announcement.
+              </p>
+              <p className="text-xs font-semibold text-amber-600 uppercase tracking-wide mb-6">
+                Limited Time Offer
               </p>
 
               <div className="flex items-baseline gap-1 mb-8">
@@ -81,23 +73,30 @@ export default function Weddings() {
           </div>
 
           {/* LUXURY */}
-          <div className="bg-[#f3f4f6] rounded-3xl p-8 sm:p-10 border border-slate-400/80 shadow-sm flex flex-col justify-between relative transition-all duration-300 hover:shadow-md">
-            <div className="absolute top-6 right-6">
-              <span className="bg-black text-white text-xs font-semibold px-3.5 py-1.5 rounded-full uppercase tracking-wider">
-                Most Popular
-              </span>
+          <div className="bg-[#f3f4f6] rounded-3xl p-8 sm:p-10 border border-slate-400/80 shadow-sm flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:shadow-md">
+            {/* Ribbon Tag */}
+            <div className="absolute top-0 right-0 transform translate-x-[28%] translate-y-[32%] rotate-45 bg-amber-500 text-black text-[10px] font-bold py-1 px-10 shadow-md uppercase tracking-wider text-center z-10">
+              20% OFF
             </div>
 
             <div>
-              <h3 className="text-2xl sm:text-3xl font-serif mb-2 text-slate-900 font-bold">
-                Luxury
-              </h3>
-              <p className="text-slate-600 text-xs sm:text-sm mb-6">
+              <div className="flex justify-between items-start gap-4 mb-2">
+                <h3 className="text-2xl sm:text-3xl font-serif text-slate-900 font-bold">
+                  Luxury
+                </h3>
+                <span className="bg-black text-white text-[10px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider mr-10">
+                  Most Popular
+                </span>
+              </div>
+              <p className="text-slate-600 text-xs sm:text-sm mb-1">
                 The ultimate high-end web experience for grand celebrations.
+              </p>
+              <p className="text-xs font-semibold text-amber-600 uppercase tracking-wide mb-6">
+                Limited Time Offer
               </p>
 
               <div className="flex items-baseline gap-1 mb-8">
-                <span className="text-4xl sm:text-5xl font-bold text-slate-900">₹2999</span>
+                <span className="text-4xl sm:text-5xl font-bold text-slate-900">₹1999</span>
               </div>
 
               <div className="space-y-3.5 text-slate-700 text-sm sm:text-base mb-8">
