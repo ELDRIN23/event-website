@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import "../demo.css";
+import "./demo.css";
 
 const STORAGE_KEY = 'weddingDemoState';
 const countdownLabels = ['Days', 'Hours', 'Minutes', 'Seconds'];

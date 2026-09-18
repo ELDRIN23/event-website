@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Heart, Sparkles, Gem, ArrowLeft } from "lucide-react";
+import WeddingDemoLink from "../components/WeddingDemoLink";
 
 export default function Weddings() {
   return (
@@ -67,9 +68,9 @@ export default function Weddings() {
               </div>
             </div>
 
-            <button className="w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm">
+            <WeddingDemoLink className="block w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm text-center">
               View Premium Demo
-            </button>
+            </WeddingDemoLink>
           </div>
 
           {/* LUXURY */}
@@ -111,11 +112,9 @@ export default function Weddings() {
               </div>
             </div>
 
-            <Link to="/wedding-demo" className="block">
-              <button className="w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm">
-                View Luxury Demo
-              </button>
-            </Link>
+            <WeddingDemoLink className="block w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm text-center">
+              View Luxury Demo
+            </WeddingDemoLink>
           </div>
 
         </div>
