@@ -7,55 +7,55 @@ const countdownLabels = ['Days', 'Hours', 'Minutes', 'Seconds'];
 
 const defaultSettings = {
   coupleNames: 'Olivia & Daniel',
-  weddingDate: '2026-09-14T18:00:00',
+  weddingDate: '2026-10-25T18:00:00',
   venue: 'Willow Creek Estate',
   accentColor: '#8c2438',
   secondaryColor: '#c9a96e',
   heroBackground: '/indian-wedding-hero.jpg',
   whatsappNumber: '919876543210',
   emailAddress: '',
-  musicUrl: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=indian-flute-112191.mp3',
-  gallery: [
+  musicUrl: '/audio/arpmedia-piano-background-music-577850.mp3',
+  photos: [
     {
-      src: '/gallery-1.jpg',
-      alt: 'Intricate bridal mehndi adorned with gold bangles',
-      caption: 'Intricate henna artistry and golden adornments of the bride.',
+      src: '/gallery-save-the-date.svg',
+      alt: 'Save the date invitation graphics',
+      caption: 'Save The Date — October 25, 2026 celebration invitation.',
     },
     {
-      src: '/gallery-2.jpg',
-      alt: 'Grand Indian wedding feast with traditional thali',
-      caption: 'A royal feast of flavors, served on brass thalis under candlelight.',
+      src: '/gallery-family-groom.jpg',
+      alt: 'Families mingling and laughing together groom side',
+      caption: 'Laughter, shaking hands & warm conversations with Daniel\'s family.',
     },
     {
-      src: '/gallery-3.jpg',
-      alt: 'Sacred kalash with jasmine and marigold garlands',
-      caption: 'Auspicious offerings adorned with jasmine, marigold, and sacred turmeric.',
+      src: '/gallery-family-bride.jpg',
+      alt: 'Families mingling and celebrating bride side',
+      caption: 'Joyful blessings, traditions & shared warmth with Olivia\'s family.',
     },
     {
-      src: '/gallery-4.jpg',
-      alt: 'Ornate bridal jewelry on maroon silk',
-      caption: 'Heirloom kundan jewelry passed through generations of love.',
+      src: '/gallery-mehndi.jpg',
+      alt: 'Full bridal mehendi intricate hands open together',
+      caption: 'Intricate full bridal henna artistry and golden bangles on two open hands.',
     },
     {
-      src: '/gallery-5.jpg',
-      alt: 'Lantern-lit wedding courtyard at twilight',
-      caption: 'A courtyard of fairy lights and lanterns awaiting the celebration.',
+      src: '/gallery-first-met.jpg',
+      alt: 'Cozy garden cafe terrace where couple first met over coffee',
+      caption: 'Where we first met — June 2022 coffee & conversation at The Garden Café.',
     },
     {
-      src: '/indian-wedding-hero.jpg',
-      alt: 'The sacred wedding mandap decorated with flowers',
-      caption: 'The floral mandap where sacred vows will be exchanged.',
+      src: '/gallery-mandap.svg',
+      alt: 'Sacred floral mandap venue illustration',
+      caption: 'The sacred floral mandap where eternal vows will be exchanged.',
     },
   ],
   videos: [
     {
       src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
-      poster: '/gallery-5.jpg',
+      poster: '/gallery-family-groom.jpg',
       title: 'Moments of Grace & Motion',
     },
     {
       src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm',
-      poster: '/gallery-3.jpg',
+      poster: '/gallery-first-met.jpg',
       title: 'Quiet Celebration & Joy',
     },
   ],
@@ -348,7 +348,9 @@ export default function App() {
       return {
         ...defaultSettings,
         ...parsed.settings,
-        gallery: parsed.settings?.gallery ?? defaultSettings.gallery,
+        weddingDate: '2026-10-25T18:00:00',
+        heroBackground: (!parsed.settings?.heroBackground || parsed.settings?.heroBackground === '/indian-wedding-hero.png') ? '/indian-wedding-hero.jpg' : parsed.settings.heroBackground,
+        photos: parsed.settings?.photos ?? parsed.settings?.gallery ?? defaultSettings.photos,
         videos: parsed.settings?.videos ?? defaultSettings.videos,
       };
     } catch {
@@ -386,7 +388,6 @@ export default function App() {
 
   const [invitationOpened, setInvitationOpened] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [panelOpen, setPanelOpen] = useState(false);
   const [isNavOpen, setNavOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [activeMedia, setActiveMedia] = useState(null);
@@ -434,11 +435,11 @@ export default function App() {
 
   // Lock body scroll on modal/drawer
   useEffect(() => {
-    document.body.style.overflow = activeMedia || panelOpen || isNavOpen ? 'hidden' : '';
+    document.body.style.overflow = activeMedia || isNavOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [activeMedia, panelOpen, isNavOpen]);
+  }, [activeMedia, isNavOpen]);
 
   // Handle ESC key for Lightbox
   useEffect(() => {
@@ -533,7 +534,7 @@ export default function App() {
     window.setTimeout(() => setBlessingFeedback(''), 5000);
   };
 
-  const activeGallery = settings.gallery ?? defaultSettings.gallery;
+  const activeGallery = settings.photos ?? settings.gallery ?? defaultSettings.photos ?? [];
   const activeVideos = settings.videos ?? defaultSettings.videos;
 
   if (isLoading) {
@@ -653,163 +654,7 @@ export default function App() {
         </button>
       )}
 
-      {/* ============================================================
-          CUSTOMIZATION DRAWER
-          ============================================================ */}
-      <aside className={`settings-panel ${panelOpen ? 'open' : ''}`} aria-hidden={!panelOpen}>
-        <div className="panel-header">
-          <h2>Personalize</h2>
-          <p>Customize couple names, date, venue, colors, and media in real time.</p>
-          <button className="panel-close" type="button" onClick={() => setPanelOpen(false)} aria-label="Close customization panel">
-            ✕
-          </button>
-        </div>
 
-        <div className="panel-inner">
-          <div className="panel-group">
-            <h3 className="panel-group-title">Wedding Details</h3>
-            <label>
-              Couple names
-              <input
-                type="text"
-                value={settings.coupleNames}
-                onChange={(event) => updateSetting('coupleNames', event.target.value)}
-              />
-            </label>
-            <label>
-              Wedding date
-              <input
-                type="datetime-local"
-                value={settings.weddingDate}
-                onChange={(event) => updateSetting('weddingDate', event.target.value)}
-              />
-            </label>
-            <label>
-              Venue
-              <input
-                type="text"
-                value={settings.venue}
-                onChange={(event) => updateSetting('venue', event.target.value)}
-              />
-            </label>
-          </div>
-
-          <div className="panel-group">
-            <h3 className="panel-group-title">Theme & Styling</h3>
-            <label>
-              Accent Color
-              <input
-                type="color"
-                value={settings.accentColor}
-                onChange={(event) => updateSetting('accentColor', event.target.value)}
-              />
-            </label>
-            <label>
-              Secondary Color
-              <input
-                type="color"
-                value={settings.secondaryColor}
-                onChange={(event) => updateSetting('secondaryColor', event.target.value)}
-              />
-            </label>
-            <label>
-              Hero Background Image URL
-              <input
-                type="text"
-                value={settings.heroBackground}
-                onChange={(event) => updateSetting('heroBackground', event.target.value)}
-              />
-            </label>
-            <label>
-              Background Music URL
-              <input
-                type="text"
-                placeholder="https://example.com/soundtrack.mp3"
-                value={settings.musicUrl}
-                onChange={(event) => updateSetting('musicUrl', event.target.value)}
-              />
-            </label>
-          </div>
-
-          <div className="panel-group">
-            <h3 className="panel-group-title">RSVP Contact Channels</h3>
-            <label>
-              WhatsApp Number (with country code)
-              <input
-                type="tel"
-                placeholder="919876543210"
-                value={settings.whatsappNumber}
-                onChange={(event) => updateSetting('whatsappNumber', event.target.value)}
-              />
-            </label>
-            <label>
-              RSVP Email Address
-              <input
-                type="email"
-                placeholder="rsvp@example.com"
-                value={settings.emailAddress}
-                onChange={(event) => updateSetting('emailAddress', event.target.value)}
-              />
-            </label>
-          </div>
-
-          <div className="panel-group">
-            <h3 className="panel-group-title">Photo Gallery</h3>
-            {activeGallery.map((item, index) => (
-              <div key={index} className="panel-item">
-                <label>
-                  Image {index + 1} URL
-                  <input
-                    type="text"
-                    value={item.src}
-                    onChange={(event) => updateGalleryItem(index, 'src', event.target.value)}
-                  />
-                </label>
-                <label>
-                  Caption
-                  <input
-                    type="text"
-                    value={item.caption}
-                    onChange={(event) => updateGalleryItem(index, 'caption', event.target.value)}
-                  />
-                </label>
-              </div>
-            ))}
-          </div>
-
-          <div className="panel-group">
-            <h3 className="panel-group-title">Video Memories</h3>
-            {activeVideos.map((item, index) => (
-              <div key={index} className="panel-item">
-                <label>
-                  Video {index + 1} URL
-                  <input
-                    type="text"
-                    value={item.src}
-                    onChange={(event) => updateVideoItem(index, 'src', event.target.value)}
-                  />
-                </label>
-                <label>
-                  Poster Image URL
-                  <input
-                    type="text"
-                    value={item.poster}
-                    onChange={(event) => updateVideoItem(index, 'poster', event.target.value)}
-                  />
-                </label>
-                <label>
-                  Title
-                  <input
-                    type="text"
-                    value={item.title}
-                    onChange={(event) => updateVideoItem(index, 'title', event.target.value)}
-                  />
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-      </aside>
 
       {/* ============================================================
           NAVIGATION
@@ -832,19 +677,7 @@ export default function App() {
           <a href="#rsvp" className="nav-rsvp-btn">
             RSVP
           </a>
-          <button
-            className={`panel-toggle ${panelOpen ? 'open' : ''}`}
-            type="button"
-            onClick={() => setPanelOpen((value) => !value)}
-            aria-expanded={panelOpen}
-            aria-label={panelOpen ? 'Close personalization panel' : 'Personalize invitation'}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-            </svg>
-            <span>{panelOpen ? 'Close' : 'Personalize'}</span>
-          </button>
+
           <button
             className={`nav-toggle ${isNavOpen ? 'open' : ''}`}
             type="button"
@@ -889,38 +722,43 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
         >
-          <p className="hero-eyebrow">The Wedding Celebration of</p>
-          <h1 className="hero-names">
-            {settings.coupleNames.includes('&') ? (
-              <>
-                {settings.coupleNames.split('&')[0].trim()}
-                <span className="hero-names-amp">&amp;</span>
-                {settings.coupleNames.split('&')[1].trim()}
-              </>
-            ) : (
-              settings.coupleNames
-            )}
-          </h1>
-          <p className="hero-tagline">
-            An auspicious gathering of love, traditions, and timeless joy at {settings.venue}.
-          </p>
+          <div className="hero-left-col">
+            <p className="hero-eyebrow">The Wedding Celebration of</p>
+            <h1 className="hero-names">
+              {settings.coupleNames.includes('&') ? (
+                <>
+                  <span className="hero-name-part">{settings.coupleNames.split('&')[0].trim()}</span>
+                  <span className="hero-names-amp">&amp;</span>
+                  <span className="hero-name-part">{settings.coupleNames.split('&')[1].trim()}</span>
+                </>
+              ) : (
+                settings.coupleNames
+              )}
+            </h1>
+          </div>
 
-          <div className="hero-meta-strip">
-            <div className="hero-meta-item">
-              <span className="hero-meta-label">Date</span>
-              <span className="hero-meta-value">{dateLabel}</span>
-            </div>
-            <div className="hero-meta-sep" />
-            <div className="hero-meta-item">
-              <span className="hero-meta-label">Venue</span>
-              <span className="hero-meta-value">{settings.venue}</span>
-            </div>
-            <div className="hero-meta-sep" />
-            <div className="hero-meta-item">
-              <span className="hero-meta-label">Ceremony</span>
-              <span className="hero-meta-value">
-                {weddingDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Onwards
-              </span>
+          <div className="hero-right-col">
+            <p className="hero-tagline">
+              An auspicious gathering of love, traditions, and timeless joy at {settings.venue}.
+            </p>
+
+            <div className="hero-meta-strip">
+              <div className="hero-meta-item">
+                <span className="hero-meta-label">Date</span>
+                <span className="hero-meta-value">{dateLabel}</span>
+              </div>
+              <div className="hero-meta-sep" />
+              <div className="hero-meta-item">
+                <span className="hero-meta-label">Venue</span>
+                <span className="hero-meta-value">{settings.venue}</span>
+              </div>
+              <div className="hero-meta-sep" />
+              <div className="hero-meta-item">
+                <span className="hero-meta-label">Ceremony</span>
+                <span className="hero-meta-value">
+                  {weddingDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Onwards
+                </span>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -935,13 +773,36 @@ export default function App() {
             3. COUPLE SECTION
             ============================================================ */}
         <section className="couple-section" id="couple">
-          <div className="couple-portrait">
-            <img
-              src={activeGallery[0]?.src || settings.heroBackground}
-              alt={settings.coupleNames}
-              loading="lazy"
-            />
-            <div className="couple-portrait-frame" />
+          <div className="couple-portraits-grid">
+            <motion.div
+              className="couple-avatar-card"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <img
+                src="/bride-avatar.jpg"
+                alt="Bride Olivia Profile Avatar"
+                loading="lazy"
+              />
+              <div className="couple-avatar-tag">The Bride</div>
+            </motion.div>
+
+            <motion.div
+              className="couple-avatar-card"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <img
+                src="/groom-avatar.jpg"
+                alt="Groom Daniel Profile Avatar"
+                loading="lazy"
+              />
+              <div className="couple-avatar-tag">The Groom</div>
+            </motion.div>
           </div>
 
           <div className="couple-info-panel">
@@ -1454,33 +1315,6 @@ export default function App() {
                 ))}
               </div>
             </article>
-          </div>
-        </section>
-
-        <SectionOrnament />
-
-        {/* ============================================================
-            13. FAQ ACCORDION
-            ============================================================ */}
-        <section className="section-block" id="faq">
-          <SectionHeader
-            eyebrow="Guest Information"
-            title="Frequently Asked Questions"
-            description="Everything you need to know for a smooth and comfortable experience during our celebrations."
-          />
-
-          <div className="faq-list">
-            {faqItems.map((item) => (
-              <details key={item.question} className="faq-item">
-                <summary className="faq-question">
-                  <span>{item.question}</span>
-                  <div className="faq-question-icon" aria-hidden="true">+</div>
-                </summary>
-                <div className="faq-answer">
-                  <p>{item.answer}</p>
-                </div>
-              </details>
-            ))}
           </div>
         </section>
       </main>

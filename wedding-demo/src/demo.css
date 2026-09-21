@@ -715,7 +715,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 20%;
 }
 
 .hero-image-layer::after {
@@ -723,112 +723,126 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(12, 4, 8, 0.8) 0%, rgba(15, 6, 12, 0.6) 40%, rgba(12, 4, 8, 0.85) 80%, rgba(12, 4, 8, 0.95) 100%);
+    linear-gradient(to bottom, rgba(12, 4, 8, 0.5) 0%, rgba(12, 4, 8, 0.1) 40%, rgba(12, 4, 8, 0.6) 80%, rgba(12, 4, 8, 0.9) 100%),
+    linear-gradient(to right, rgba(12, 4, 8, 0.75) 0%, rgba(12, 4, 8, 0.15) 35%, rgba(12, 4, 8, 0.15) 65%, rgba(12, 4, 8, 0.75) 100%);
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 0 64px 88px;
-  max-width: 1360px;
+  padding: 120px 48px 72px;
+  max-width: 1440px;
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.hero-left-col {
+  flex: 1;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero-right-col {
+  flex: 1;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
 }
 
 .hero-eyebrow {
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: #ffdf9e;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
-  margin: 0 0 18px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.hero-eyebrow::before,
-.hero-eyebrow::after {
-  content: '';
-  display: block;
-  height: 1px;
-  width: 48px;
-  background: linear-gradient(90deg, transparent, #ffdf9e);
-}
-
-.hero-eyebrow::after {
-  background: linear-gradient(90deg, #ffdf9e, transparent);
+  margin: 0 0 16px;
 }
 
 .hero-names {
   font-family: var(--font-display);
-  font-size: clamp(3.8rem, 8vw, 7.2rem);
+  font-size: clamp(3.2rem, 6.2vw, 5.8rem);
   font-weight: 700;
-  line-height: 0.94;
+  line-height: 0.96;
   color: #ffffff;
-  margin: 0 0 20px;
+  margin: 0;
   letter-spacing: -0.01em;
   text-shadow: 0 4px 25px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-name-part {
+  display: block;
 }
 
 .hero-names-amp {
   display: inline-block;
-  font-size: 0.55em;
+  font-size: 0.5em;
   font-weight: 400;
   font-style: italic;
   color: #ffdf9e;
   letter-spacing: 0.08em;
-  margin: 0 14px;
+  margin: 4px 0;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 }
 
 .hero-tagline {
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
   font-weight: 500;
   font-style: italic;
   color: #ffffff;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
-  margin: 0 0 36px;
-  line-height: 1.65;
-  max-width: 640px;
-  background: rgba(15, 8, 12, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 18px 26px;
+  margin: 0;
+  line-height: 1.6;
+  width: 100%;
+  background: rgba(15, 8, 12, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 16px 22px;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  text-align: left;
 }
 
 .hero-meta-strip {
   display: flex;
-  align-items: center;
-  gap: 36px;
-  flex-wrap: wrap;
-  background: rgba(15, 8, 12, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  padding: 22px 36px;
-  border-radius: 20px;
+  flex-direction: column;
+  gap: 14px;
+  background: rgba(15, 8, 12, 0.76);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 20px 24px;
+  border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
+  text-align: left;
 }
 
 .hero-meta-item {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .hero-meta-label {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: #ffdf9e;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
@@ -836,7 +850,7 @@
 
 .hero-meta-value {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: #ffffff;
   line-height: 1.2;
@@ -844,10 +858,9 @@
 }
 
 .hero-meta-sep {
-  width: 1px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.3);
-  align-self: center;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .hero-scroll-cue {
@@ -2704,3 +2717,67 @@ details[open] .faq-question-icon {
   .inv-monogram { width: 60px; height: 60px; }
   .inv-monogram span { font-size: 1.4rem; }
 }
+
+/* ============================================================
+   CARTOON PROFILE AVATARS & GALLERY STYLING
+   ============================================================ */
+.couple-portraits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 32px;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(255, 252, 248, 0.95), rgba(247, 239, 226, 0.9));
+  border-right: 1px solid var(--border-light);
+}
+
+.couple-avatar-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-card);
+  padding: 24px 16px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-gold);
+  box-shadow: var(--shadow-md);
+  transition: transform 300ms var(--ease-wedding), box-shadow 300ms var(--ease-wedding);
+}
+
+.couple-avatar-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.couple-avatar-card img {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.couple-avatar-tag {
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  background: rgba(201, 169, 110, 0.15);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-gold);
+}
+
+@media (max-width: 900px) {
+  .couple-portraits-grid {
+    grid-template-columns: 1fr 1fr;
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+    padding: 24px 16px;
+  }
+}
+
