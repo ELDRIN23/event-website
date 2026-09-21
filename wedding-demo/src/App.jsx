@@ -146,36 +146,7 @@ const scheduleItems = [
   },
 ];
 
-const dressCodeItems = [
-  {
-    icon: '👗',
-    title: 'Traditional / Festive Elegance',
-    detail: 'Traditional Indian attire, sarees, lehengas, sherwanis, or elegant evening wear in rich festive tones.',
-  },
-  {
-    icon: '🌿',
-    title: 'Garden Friendly',
-    detail: 'Light breathable fabrics and comfortable footwear suitable for lawns and stone terraces.',
-  },
-  {
-    icon: '✨',
-    title: 'Refined Accents',
-    detail: 'Warm jewel tones, antique gold accents, and celebratory details that feel joyous and polished.',
-  },
-];
 
-const registryItems = [
-  {
-    title: 'Home & Heritage Collection',
-    detail: 'Handcrafted artisan pieces to help us build a calm, warm, and beautiful home together.',
-    link: '#',
-  },
-  {
-    title: 'Honeymoon & Experiences',
-    detail: 'Thoughtful travel, cultural discoveries, and memorable dining experiences for our first year of marriage.',
-    link: '#',
-  },
-];
 
 const faqItems = [
   {
@@ -670,7 +641,7 @@ export default function App() {
           <a href="#venue" className="nav-link">Venue</a>
           <a href="#gallery" className="nav-link">Gallery</a>
           <a href="#wishes" className="nav-link">Blessings</a>
-          <a href="#details" className="nav-link">Details</a>
+
           <a href="#faq" className="nav-link">FAQ</a>
         </div>
         <div className="nav-actions">
@@ -703,7 +674,7 @@ export default function App() {
           <a href="#gallery" className="nav-link-drawer" onClick={() => setNavOpen(false)}>Gallery</a>
           <a href="#wishes" className="nav-link-drawer" onClick={() => setNavOpen(false)}>Blessings</a>
           <a href="#rsvp" className="nav-link-drawer" onClick={() => setNavOpen(false)}>RSVP</a>
-          <a href="#details" className="nav-link-drawer" onClick={() => setNavOpen(false)}>Details</a>
+
           <a href="#faq" className="nav-link-drawer" onClick={() => setNavOpen(false)}>FAQ</a>
         </div>
       </div>
@@ -1278,45 +1249,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* ============================================================
-            12. DETAILS / DRESS CODE & REGISTRY
-            ============================================================ */}
-        <section className="section-block" id="details">
-          <div className="details-grid">
-            <article className="detail-card">
-              <div className="detail-icon-wrap" aria-hidden="true">
-                <span>👗</span>
-              </div>
-              <h3>Dress Code Guidelines</h3>
-              <p>We invite our guests to dress in festive, elegant attire celebrating warm colors, rich fabrics, and joy.</p>
-              <ul className="detail-list">
-                {dressCodeItems.map((item) => (
-                  <li key={item.title}>
-                    <div>
-                      <strong>{item.title}:</strong> {item.detail}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </article>
 
-            <article className="detail-card">
-              <div className="detail-icon-wrap" aria-hidden="true">
-                <span>🎁</span>
-              </div>
-              <h3>Gifts &amp; Registry</h3>
-              <p>Your loving presence and sacred blessings are the greatest gifts of all. For loved ones who have asked, here are a few registry ideas.</p>
-              <div className="registry-list">
-                {registryItems.map((item) => (
-                  <a key={item.title} href={item.link} className="registry-item">
-                    <strong>{item.title}</strong>
-                    <span>{item.detail}</span>
-                  </a>
-                ))}
-              </div>
-            </article>
-          </div>
-        </section>
       </main>
 
       {/* ============================================================
