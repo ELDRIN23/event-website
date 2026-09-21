@@ -17,19 +17,9 @@ const defaultSettings = {
   musicUrl: '/audio/arpmedia-piano-background-music-577850.mp3',
   photos: [
     {
-      src: '/gallery-save-the-date.svg',
-      alt: 'Save the date invitation graphics',
-      caption: 'Save The Date — October 25, 2026 celebration invitation.',
-    },
-    {
       src: '/gallery-family-groom.jpg',
       alt: 'Families mingling and laughing together groom side',
       caption: 'Laughter, shaking hands & warm conversations with Daniel\'s family.',
-    },
-    {
-      src: '/gallery-family-bride.jpg',
-      alt: 'Families mingling and celebrating bride side',
-      caption: 'Joyful blessings, traditions & shared warmth with Olivia\'s family.',
     },
     {
       src: '/gallery-mehndi.jpg',
@@ -42,21 +32,9 @@ const defaultSettings = {
       caption: 'Where we first met — June 2022 coffee & conversation at The Garden Café.',
     },
     {
-      src: '/gallery-mandap.svg',
-      alt: 'Sacred floral mandap venue illustration',
-      caption: 'The sacred floral mandap where eternal vows will be exchanged.',
-    },
-  ],
-  videos: [
-    {
-      src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
-      poster: '/gallery-family-groom.jpg',
-      title: 'Moments of Grace & Motion',
-    },
-    {
-      src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm',
-      poster: '/gallery-first-met.jpg',
-      title: 'Quiet Celebration & Joy',
+      src: '/gallery-1.jpg',
+      alt: 'Festive wedding celebration moment',
+      caption: 'Joyful blessings, sacred rituals & festive warmth.',
     },
   ],
 };
@@ -321,8 +299,7 @@ export default function App() {
         ...parsed.settings,
         weddingDate: '2026-10-25T18:00:00',
         heroBackground: (!parsed.settings?.heroBackground || parsed.settings?.heroBackground === '/indian-wedding-hero.png') ? '/indian-wedding-hero.jpg' : parsed.settings.heroBackground,
-        photos: parsed.settings?.photos ?? parsed.settings?.gallery ?? defaultSettings.photos,
-        videos: parsed.settings?.videos ?? defaultSettings.videos,
+        photos: defaultSettings.photos,
       };
     } catch {
       return defaultSettings;
@@ -505,8 +482,7 @@ export default function App() {
     window.setTimeout(() => setBlessingFeedback(''), 5000);
   };
 
-  const activeGallery = settings.photos ?? settings.gallery ?? defaultSettings.photos ?? [];
-  const activeVideos = settings.videos ?? defaultSettings.videos;
+  const activeGallery = settings.photos ?? defaultSettings.photos ?? [];
 
   if (isLoading) {
     return (
@@ -1000,43 +976,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* ============================================================
-            9. VIDEO GALLERY (Moments in Motion)
-            ============================================================ */}
-        <section className="section-block" id="video-gallery">
-          <SectionHeader
-            eyebrow="Cinematography"
-            title="Moments in Motion"
-            description="Atmospheric clips capturing light, movement, and the spirit of our celebrations."
-          />
 
-          <div className="video-grid">
-            {activeVideos.map((item, index) => (
-              <motion.button
-                key={item.src + index}
-                className="video-item"
-                type="button"
-                onClick={() => setActiveMedia({ ...item, type: 'video' })}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: index * 0.1 }}
-              >
-                <img src={item.poster} alt={item.title} loading="lazy" />
-                <div className="video-play-overlay">
-                  <div className="video-play-btn" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="video-title-strip">
-                  <span>{item.title}</span>
-                </div>
-              </motion.button>
-            ))}
-          </div>
-        </section>
 
         {/* ============================================================
             10. BLESSINGS & WISHES SECTION (Wedding Guestbook)
