@@ -682,6 +682,11 @@ export default function App() {
                 settings.coupleNames
               )}
             </h1>
+
+            <div className="hero-countdown-wrap">
+              <p className="hero-countdown-label">Counting Down To October 25</p>
+              <Countdown targetDate={weddingDate} />
+            </div>
           </div>
 
           <div className="hero-right-col">
@@ -781,13 +786,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* ============================================================
-            4. COUNTDOWN SECTION
-            ============================================================ */}
-        <section className="countdown-wrap" aria-label="Auspicious Countdown">
-          <p className="countdown-label">Auspicious Countdown to the Sacred Ceremony</p>
-          <Countdown targetDate={weddingDate} />
-        </section>
+
 
         {/* ============================================================
             5. OUR STORY / RELATIONSHIP TIMELINE
