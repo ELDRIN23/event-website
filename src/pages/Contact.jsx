@@ -1,6 +1,6 @@
 /**
  * @authors Eldrin Johnson, Merin Joy
- * @copyright Copyright (c) 2026 Eldrin Johnson and Merin Joy. All Rights Reserved.
+ * @copyright Copyright (c) 2026 Eldrin Johnson. All Rights Reserved.
  * 
  * PROPRIETARY & CONFIDENTIAL
  * This source code, component logic, and UI design are the exclusive property 
