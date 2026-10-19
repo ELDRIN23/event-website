@@ -4,7 +4,7 @@
  * 
  * PROPRIETARY & CONFIDENTIAL
  * This source code, component logic, and UI design are the exclusive property 
- * of Eldrin Johnson and Merin Joy. Unauthorized copying, duplication, distribution, or 
+ * of Eldrin Johnson. Unauthorized copying, duplication, distribution, or 
  * modification of this file via any medium is strictly prohibited by law.
  */
 import React from "react";
@@ -126,10 +126,10 @@ export default function Contact() {
             experiences that help showcase life's most important moments.
           </p>
 
-          <div className="inline-block px-4 py-2.5 bg-white rounded-xl border border-neutral-300 shadow-sm">
+          {/* <div className="inline-block px-4 py-2.5 bg-white rounded-xl border border-neutral-300 shadow-sm">
             <span className="text-black font-semibold text-xs sm:text-sm">Eldrin Johnson & Merin Joy</span>
             <span className="text-neutral-500 text-[11px] sm:text-xs block">Lead Developers & Founders</span>
-          </div>
+          </div> */}
         </div>
       </section>
       
