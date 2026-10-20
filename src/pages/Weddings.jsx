@@ -6,7 +6,6 @@ import WeddingDemoLink from "../components/WeddingDemoLink";
 export default function Weddings() {
   return (
     <div className="bg-[#fafbfc] text-slate-900 min-h-screen overflow-x-hidden font-sans">
-      
       {/* TOP HEADER BAR WITH BACK LINK */}
       <div className="max-w-7xl mx-auto px-6 pt-8 pb-4 flex items-center justify-between">
         <Link 
@@ -68,9 +67,14 @@ export default function Weddings() {
               </div>
             </div>
 
-            <WeddingDemoLink className="block w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm text-center">
-              View Premium Demo
-            </WeddingDemoLink>
+            <a
+              href="https://premium-wed.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm text-center"
+            >
+              View premium  Demo
+            </a>
           </div>
 
           {/* LUXURY */}
@@ -112,11 +116,15 @@ export default function Weddings() {
               </div>
             </div>
 
-            <WeddingDemoLink className="block w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm text-center">
+            <a
+              href="https://stellar-kashata-dbb922.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm text-center"
+            >
               View Luxury Demo
-            </WeddingDemoLink>
+            </a>
           </div>
-
         </div>
       </section>
 

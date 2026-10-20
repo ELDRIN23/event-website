@@ -182,7 +182,7 @@ export default function App() {
     {
       title: "Luxury Weddings",
       description: "Premium wedding invitation websites.",
-      route: "/weddings",
+      route: "/Weddings",
       image:
         "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
     },
