@@ -1,29 +1,11 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
-import { Gem, ArrowLeft, Heart } from "lucide-react";
+import { Heart, Sparkles, Gem, ArrowLeft } from "lucide-react";
+import WeddingDemoLink from "../components/WeddingDemoLink";
 
-export default function LoveCelebrations() {
-  const events = [
-    {
-      title: "Engagement Website",
-      description:
-        "Elegant engagement websites featuring countdowns, couple stories, galleries and RSVP.",
-      image:
-        "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
-    },
-    {
-      title: "Anniversary Website",
-      description:
-        "Celebrate milestones with beautiful anniversary websites showcasing memories and moments.",
-      image:
-        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1600&auto=format&fit=crop",
-    },
-  ];
-
+export default function Weddings() {
   return (
     <div className="bg-[#fafbfc] text-slate-900 min-h-screen overflow-x-hidden font-sans">
-      
       {/* TOP HEADER BAR WITH BACK LINK */}
       <div className="max-w-7xl mx-auto px-6 pt-8 pb-4 flex items-center justify-between">
         <Link 
@@ -33,159 +15,127 @@ export default function LoveCelebrations() {
           <ArrowLeft size={16} /> Back to Home
         </Link>
         <span className="text-xs uppercase tracking-[3px] text-slate-400 font-medium">
-          Collection 03
+          Collection 01
         </span>
       </div>
 
-      {/* DEMOS */}
-      <section className="py-12 px-6 md:px-16 max-w-7xl mx-auto">
+      {/* PACKAGES SECTION */}
+      <section className="py-12 md:py-20 px-6 max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2 flex items-center justify-center gap-1.5">
-            <Heart size={14} className="text-rose-500 fill-rose-500" /> Love & Celebrations
+            <Gem size={14} /> Transparent Rates
           </p>
-          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">Love Celebration Collection</h2>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {events.map((event, index) => (
-            <div
-              key={index}
-              className="relative bg-[#f3f4f6] rounded-3xl overflow-hidden border border-slate-300/80 shadow-sm transition-all duration-300 hover:shadow-md flex flex-col justify-between group"
-            >
-              {/* CORNER RIBBON TAG (SOLID DARK RED, NO ANIMATION) */}
-              <div className="absolute top-0 left-0 w-32 h-32 overflow-hidden z-20 pointer-events-none">
-                <div className="absolute top-5 -left-10 w-40 bg-red-800 text-white font-semibold text-[11px] tracking-wider uppercase text-center py-1.5 -rotate-45 shadow-md">
-                  JUST ₹999
-                </div>
-              </div>
-
-              <div className="overflow-hidden aspect-[16/10] bg-slate-200">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-
-              <div className="p-8 flex flex-col flex-grow justify-between">
-                <div>
-                  <h3 className="text-2xl font-serif mb-2 text-slate-900 font-bold">{event.title}</h3>
-                  <p className="text-slate-600 leading-relaxed text-sm mb-8">
-                    {event.description}
-                  </p>
-                </div>
-
-                <div className="block mt-auto">
-                  {/* <button className="w-full bg-black text-white py-3.5 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm">
-                    View Demo
-                  </button> */}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section className="py-20 bg-white px-6 md:px-16 border-t border-slate-200/60">
-        <div className="text-center mb-14">
-          <p className="uppercase tracking-[4px] text-slate-500 text-xs font-semibold mb-2 flex items-center justify-center gap-1.5">
-            <Gem size={14} /> Full Package
-          </p>
-          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">Included Features</h2>
-        </div>
-
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            "Countdown Timer",
-            "Couple Story",
-            "Photo Gallery",
-            "Google Maps",
-            "WhatsApp RSVP",
-            "Guest Information",
-            "Mobile Responsive",
-            "Custom Design",
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="bg-[#f3f4f6] rounded-2xl p-6 border border-slate-300/80 shadow-sm text-center"
-            >
-              <h3 className="text-lg font-serif font-bold text-slate-900">{item}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SHOWCASE */}
-      <section className="py-20 px-6 md:px-16 max-w-7xl mx-auto border-t border-slate-200/60">
-        <div className="text-center mb-14">
           <h2 className="text-3xl md:text-5xl font-serif text-slate-900">
-            Featured Design
+            Wedding Packages
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10 items-center bg-[#f3f4f6] border border-slate-300/80 rounded-3xl p-8 sm:p-12 shadow-sm">
-          <div className="overflow-hidden rounded-2xl bg-slate-200 aspect-[16/10]">
-            <img
-              src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1600&auto=format&fit=crop"
-              alt="Featured Design"
-              className="rounded-2xl h-full w-full object-cover"
-            />
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch pt-4">
+
+          {/* PREMIUM */}
+          <div className="bg-[#f3f4f6] rounded-3xl p-8 sm:p-10 border border-slate-300/80 shadow-sm flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:shadow-md">
+            {/* Ribbon Tag */}
+            <div className="absolute top-0 right-0 transform translate-x-[28%] translate-y-[32%] rotate-45 bg-amber-500 text-black text-[10px] font-bold py-1 px-10 shadow-md uppercase tracking-wider text-center z-10">
+              20% OFF
+            </div>
+
+            <div>
+              <div className="flex justify-between items-start gap-4 mb-2">
+                <h3 className="text-2xl sm:text-3xl font-serif text-slate-900 font-bold">
+                  Premium
+                </h3>
+              </div>
+              <p className="text-slate-600 text-xs sm:text-sm mb-1">
+                Essential features for a beautiful wedding announcement.
+              </p>
+              <p className="text-xs font-semibold text-amber-600 uppercase tracking-wide mb-6">
+                Limited Time Offer
+              </p>
+
+              <div className="flex items-baseline gap-1 mb-8">
+                <span className="text-4xl sm:text-5xl font-bold text-slate-900">₹1499</span>
+              </div>
+
+              <div className="space-y-3.5 text-slate-700 text-sm sm:text-base mb-8">
+                <p className="flex items-center gap-3">✓ Countdown Timer</p>
+                <p className="flex items-center gap-3">✓ Photo Gallery</p>
+                <p className="flex items-center gap-3">✓ Couple Story</p>
+                <p className="flex items-center gap-3">✓ Google Maps Integration</p>
+                <p className="flex items-center gap-3">✓ WhatsApp RSVP</p>
+                <p className="flex items-center gap-3">✓ Mobile Responsive</p>
+                <p className="flex items-center gap-3">✓ 30 Days Hosting</p>
+              </div>
+            </div>
+
+            <a
+              href="https://premium-wed.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm text-center"
+            >
+              View premium  Demo
+            </a>
           </div>
 
-          <div>
-            <h3 className="text-3xl font-serif mb-4 text-slate-900 font-bold">
-              Crafted For Modern Couples
-            </h3>
+          {/* LUXURY */}
+          <div className="bg-[#f3f4f6] rounded-3xl p-8 sm:p-10 border border-slate-400/80 shadow-sm flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:shadow-md">
+            {/* Ribbon Tag */}
+            <div className="absolute top-0 right-0 transform translate-x-[28%] translate-y-[32%] rotate-45 bg-amber-500 text-black text-[10px] font-bold py-1 px-10 shadow-md uppercase tracking-wider text-center z-10">
+              20% OFF
+            </div>
 
-            <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
-              Our websites blend elegance and functionality,
-              helping couples share their story and manage their
-              special day beautifully.
-            </p>
+            <div>
+              <div className="flex justify-between items-start gap-4 mb-2">
+                <h3 className="text-2xl sm:text-3xl font-serif text-slate-900 font-bold">
+                  Luxury
+                </h3>
+                <span className="bg-black text-white text-[10px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider mr-10">
+                  Most Popular
+                </span>
+              </div>
+              <p className="text-slate-600 text-xs sm:text-sm mb-1">
+                The ultimate high-end web experience for grand celebrations.
+              </p>
+              <p className="text-xs font-semibold text-amber-600 uppercase tracking-wide mb-6">
+                Limited Time Offer
+              </p>
+
+              <div className="flex items-baseline gap-1 mb-8">
+                <span className="text-4xl sm:text-5xl font-bold text-slate-900">₹1999</span>
+              </div>
+
+              <div className="space-y-3.5 text-slate-700 text-sm sm:text-base mb-8">
+                <p className="flex items-center gap-3">✓ Everything In Premium</p>
+                <p className="flex items-center gap-3">✓ Backend Support</p>
+                <p className="flex items-center gap-3">✓ Multiple Galleries</p>
+                <p className="flex items-center gap-3">✓ Wedding Timeline</p>
+                <p className="flex items-center gap-3">✓ Guest Wishes Section</p>
+                <p className="flex items-center gap-3">✓ Custom Music</p>
+                <p className="flex items-center gap-3">✓ Custom Domain Support (Paid)</p>
+                <p className="flex items-center gap-3">✓ Priority Support</p>
+              </div>
+            </div>
+
+            <a
+              href="https://stellar-kashata-dbb922.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm text-center"
+            >
+              View Luxury Demo
+            </a>
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="py-20 bg-white px-6 md:px-16 border-t border-slate-200/60">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-5xl font-serif text-slate-900">
-            What Clients Love
-          </h2>
-        </div>
-
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
-          <div className="bg-[#f3f4f6] rounded-3xl p-8 border border-slate-300/80 shadow-sm flex flex-col justify-between">
-            <p className="text-slate-700 leading-relaxed text-base italic mb-6">
-              "The website looked beautiful and our guests loved the RSVP feature."
-            </p>
-
-            <p className="text-amber-500 font-bold tracking-widest text-sm">
-              ★★★★★
-            </p>
-          </div>
-
-          <div className="bg-[#f3f4f6] rounded-3xl p-8 border border-slate-300/80 shadow-sm flex flex-col justify-between">
-            <p className="text-slate-700 leading-relaxed text-base italic mb-6">
-              "Everything was simple, elegant and worked perfectly on mobile."
-            </p>
-
-            <p className="text-amber-500 font-bold tracking-widest text-sm">
-              ★★★★★
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 bg-white text-center px-6 border-t border-slate-200/60">
+      {/* CTA SECTION */}
+      <section className="py-20 text-center px-6 border-t border-slate-200/60 bg-white">
         <h2 className="text-3xl md:text-5xl font-serif text-slate-900 mb-4">
-          Let's Build Your Celebration Website
+          Ready For Your Wedding Website?
         </h2>
 
         <p className="text-slate-600 mb-8 text-base">
-          Perfect for engagements, anniversaries and intimate weddings.
+          Choose your package and contact us today.
         </p>
 
         <a

@@ -117,7 +117,7 @@ export default function Weddings() {
             </div>
 
             <a
-              href="https://stellar-kashata-dbb922.netlify.app/"
+              href="https://luxury-wed.netlify.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full bg-black text-white py-4 rounded-xl font-medium text-sm hover:bg-slate-800 transition-all shadow-sm text-center"
